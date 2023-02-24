@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: Safe shell script sets
+# key: safe
+# contributor: Ryan Luckie <rtluckie@gmail.com>
+# --
+set -euf -o pipefail

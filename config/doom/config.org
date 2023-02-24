@@ -1,0 +1,402 @@
+-*- org -*-
+
+#+TITLE: emacs literate configuration
+#+AUTHOR: Ryan Luckie
+#+EMAIL: rtluckie@gmail.com
+#+STARTUP: overview
+
+* rluckie's literate doom configuration
+
+According to [[https://nullprogram.com/blog/2016/12/22/][this blog]], this lexical-binding can improve performance.
+
+#+begin_src elisp
+;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+#+end_src
+
+User identification. You can find more information in the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/User-Identification.html][official documentation]].
+
+#+begin_src elisp
+(setq
+  user-full-name "Ryan Luckie"
+  user-mail-address "rtluckie@gmail.com")
+#+end_src
+
+** Display configuration
+*** Font
+
+I am still undecided on usage of variable pitch font. I cannot recall what issue it was causing for me, but it had to do with ligatures. It is probably fine.
+
+#+begin_src elisp
+
+ (setq font "Fira Code" )
+ (setq sans-font font )
+ (setq serif-font "Source Serif 4" )
+ (setq font-size 24 )
+ (setq big-font-size 24 )
+ (setq
+   doom-font (font-spec :family font :size font-size)
+   doom-big-font (font-spec :family font :size big-font-size)
+   doom-serif-font (font-spec :family font :size font-size)
+   doom-unicode-font (font-spec :family sans-font :size font-size)
+   doom-variable-pitch-font (font-spec :family font :size font-size)
+)
+#+end_src
+
+*** Modeline
+
+#+begin_src elisp
+(custom-set-faces
+  '(mode-line ((t (:height 0.95))))
+  '(mode-line-inactive ((t (:height 0.95)))))
+#+end_src
+
+#+begin_src elisp
+(defun rtl-doom-modeline--font-height ()
+  "Calculate the actual char height of the mode-line."
+  (+ (frame-char-height) 2))
+(advice-add #'doom-modeline--font-height :override #'rtl-doom-modeline--font-height)
+#+end_src
+
+#+begin_src elisp
+(use-package doom-modeline
+  :hook (after-init . doom-modeline-mode)
+  :custom
+  (doom-modeline-height 1)
+  (doom-modeline-bar-width 0)
+  (doom-modeline-buffer-state-icon t)
+  (doom-modeline-buffer-modification-icon t))
+#+end_src
+
+*** Theme
+Now that Prot has release [[https://github.com/protesilaos/ef-themes][ef-themes]], I see no reason to use any others.
+
+#+begin_src elisp
+(require 'ef-themes)
+(mapc #'disable-theme custom-enabled-themes)
+(load-theme 'doom-dracula :no-confirm)
+#+end_src
+
+
+**** Alpha
+This can set the windows alpha, and I may want that sometime, but generally I use emacs edge-to-edge and on macOS, one cannot use transparency in full screen.
+
+#+begin_src elisp
+;; alpha
+;; (set-frame-parameter (selected-frame) 'alpha '(90 65))
+;; (add-to-list 'default-frame-alist '(alpha 90 65))
+#+end_src
+
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'window-setup-hook #'toggle-frame-maximized)
+#+END_SRC
+
+*** Lines
+
+The line I am on is always in the modeline, so generally I don't need to see these. And if I do, it is always just a ~SPC t l~ away.
+
+#+begin_src elisp
+(setq display-line-numbers-type t)
+#+end_src
+
+Toggle line wrapping.
+
+#+begin_src elisp
+(map! :leader
+      (:prefix-map ("t" . "toggle")
+        :desc "Toggle truncate lines"            "t" #'toggle-truncate-lines))
+#+end_src
+
+Who doesn't want Bruce Lee to greet them at the beginning of a work session. He's there to remind you:
+
+#+begin_quote
+Do not pray for an easy life, pray for the strength to endure a difficult one.
+#+end_quote
+
+#+begin_src elisp
+(setq fancy-splash-image "~/.config/media/images/splash/ape_200w.png")
+#+end_src
+
+*** treemacs
+#+begin_src elisp
+(with-eval-after-load 'doom-themes
+  (setq doom-themes-treemacs-theme "doom-colors")
+  (doom-themes-treemacs-config))
+(custom-set-faces
+  '(treemacs-root-face ((t (:height 1.0))))
+  )
+(setq treemacs-space-between-root-nodes nil)
+#+end_src
+
+*** avy
+#+begin_src elisp
+    (setq avy-all-windows t)
+    (setq avy-all-windows-alt t)
+#+end_src
+** everywhere
+
+#+begin_src elisp
+(setq emacs-everywhere-frame-parameters '((name . "emacs-everywhere") (height . 18) (width . 80)))
+#+end_src
+
+** groovy-mode
+
+Load all files called =*jenkinsfile*= in groovy-mode.
+
+#+begin_src elisp
+(add-to-list 'auto-mode-alist '("[Jj]enkinsfile" . groovy-mode))
+#+end_src
+
+** python-mode
+
+Use direnv for best venv, virtualenv, pyenv handling. Add =layout pyenv <version>= to .envrc. This will automatically create a virtual environment with the given python executable.
+
+Remember to run =lsp-workspace-restart=.
+
+*** Get pytest from executable
+
+This is suggested [[https://github.com/hlissner/doom-emacs/issues/2424#issuecomment-723091495][here]], but doesn't seem to work.
+
+#+begin_src elisp
+(add-hook! python-mode
+  (advice-add 'python-pytest-file :before
+              (lambda (&rest args)
+                (setq python-pytest-executable (+python-executable-find "pytest")))))
+#+end_src
+
+** org-mode
+
+This is the directory in which emacs should look for org files that I use for agenda. I link files here from elsewhere.
+
+#+begin_src elisp
+(setq org-directory "~/projects/github.com/rtluckie/org")
+;; (after! org
+;;   (setq org-agenda-files '("~/projects/github.com/rtluckie/notes")))
+#+end_src
+
+When the pointer is over a link in org-mode ~SPC m l y~ will yank that link.
+
+#+begin_src elisp
+(defun rtluckie/org-link-yank (&optional arg)
+  "Extract URL from org-mode link and add it to kill ring."
+  (interactive "P")
+  (let* ((link (org-element-lineage (org-element-context) '(link) t))
+         (type (org-element-property :type link))
+         (url (org-element-property :path link))
+         (url (concat type ":" url)))
+    (kill-new url)
+    (message (concat "Copied URL: " url))))
+
+(map! :after org
+      :map org-mode-map
+      :localleader
+      (:prefix  ("l" . "links")
+       "y" #'rtluckie/org-link-yank))
+#+end_src
+
+While org's agenda todo list is usually sufficient, this let's you collapse a current org-mode file to expose only the TODO's within.
+
+#+begin_src elisp
+(map! :leader
+      (:prefix-map ("t" . "toggle")
+       (:prefix-map ("o" . "org")
+        :desc "Show todo tree"            "t" #'org-show-todo-tree)))
+#+end_src
+
+Make org pretty with [[https://github.com/minad/org-modern][org-modern]].
+
+#+begin_src elisp
+(add-hook 'org-mode-hook #'org-modern-mode)
+#+end_src
+
+org-roam and org-roam-ui settings
+
+#+begin_src elisp
+(use-package! websocket
+    :after org-roam)
+
+(use-package! org-roam-ui
+    :after org
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
+#+end_src
+
+#+begin_src elisp
+(map! :leader
+      (:prefix-map ("n" . "notes")
+       (:prefix ("r" . "roam")
+        (:prefix-map ("u" . "Org Roam UI")
+         :desc "org roam ui open"          "o" #'org-roam-ui-open))))
+#+end_src
+
+Load ox exporters (gfm, jira, and pandoc) as soon as org is loaded. No clue why running all these in one =progn= within the =eval-after-load=, but here we are.
+
+#+begin_src elisp
+(eval-after-load "org"
+  '(require 'ox-gfm nil t))
+(eval-after-load "org"
+  '(require 'ox-jira nil t))
+(eval-after-load "org"
+  '(require 'ox-pandoc nil t))
+#+end_src
+
+** projectile
+
+#+begin_src elisp
+(setq projectile-project-search-path
+      '(("~/projects/github.com/" . 2))
+      projectile-sort-order 'recentf)
+#+end_src
+
+** global shortcuts
+
+Execute make targets.
+
+#+begin_src elisp
+
+(map! :leader
+      (:prefix-map ("c" . "code")
+       :desc "Execute make target"        "m" #'makefile-executor-execute-target))
+#+end_src
+
+*** LSP
+
+lsp-ui-imenu is a less helpful alternative.
+
+#+begin_src elisp
+(map! :leader
+      (:prefix-map ("c" . "code")
+       :desc "LSP UI doc glance"        "g" #'lsp-ui-doc-glance)
+      (:prefix-map ("o" . "open")
+       :desc "Symbol explorer"          "l" #'lsp-treemacs-symbols))
+#+end_src
+
+** Formatters
+#+begin_src elisp
+(set-formatter! 'alejandra "alejandra --quiet" :modes '(nix-mode))
+(setq-hook! 'nix-mode-hook +format-with 'alejandra)
+#+end_src
+
+*** Nix
+** Open terminal
+
+*** Wezterm
+
+#+begin_src elisp
+(defun rtl-open-wezterm-right-here ()
+  "Open or switch kitty to root directory of current project."
+  (interactive)
+  (let* ((cmd (concat "open -a wezterm.app --args \"cd\" " default-directory)))
+    (shell-command cmd)))
+#+end_src
+
+** Copy file paths
+
+*** Copy path current dir
+
+#+BEGIN_SRC emacs-lisp
+(defun rtl-copy-pwd ()
+  "Copy PWD command to clipboard"
+  (interactive)
+  (when (buffer-file-name)
+    (kill-new (replace-regexp-in-string " " "\\\\\  " (file-name-directory (buffer-file-name))))))
+#+END_SRC
+
+*** Copy current file name
+#+BEGIN_SRC emacs-lisp
+(defun rtl-copy-file-name ()
+  "Copy file name command to clipboard"
+  (interactive)
+  (when (buffer-file-name)
+    (kill-new (file-name-nondirectory (buffer-file-name)))))
+#+END_SRC
+
+*** Copy full path
+#+BEGIN_SRC emacs-lisp
+(defun rtl-copy-full-path ()
+  "Copy full path till file to clipboard"
+  (interactive)
+  (when (buffer-file-name)
+    (kill-new (replace-regexp-in-string " " "\\\\\  " (buffer-file-name)))))
+#+END_SRC
+** Open vterm for current buffer
+#+BEGIN_SRC emacs-lisp
+(defun rtl-vterm-change-current-directory-to-active-buffer-pwd ()
+  "Just exec CD to pwd of active buffer."
+  (interactive)
+  (when-let* ((file-name (buffer-file-name))
+              (file-dir (file-name-directory file-name))
+              (file-dir (replace-regexp-in-string " " "\\\\\  " file-dir)))
+    (message "FILE: %s" file-dir)
+    (save-window-excursion
+      (switch-to-first-matching-buffer "vterm")
+      (vterm-send-C-c)
+      (vterm-send-string (concat "cd " file-dir))
+      (vterm-send-return)
+      )
+    (evil-window-down 1)))
+#+END_SRC
+
+** SRE
+
+*** K8s
+#+begin_src elisp
+(use-package! kubernetes
+  :defer 6
+  :commands (kubernetes-overview)
+  :bind (:map evil-normal-state-map
+              ("SPC o K" . kubernetes-overview))
+  :config
+  (setq kubernetes-poll-frequency 3600
+        kubernetes-redraw-frequency 3600))
+
+(use-package! k8s-mode
+  :defer t)
+#+end_src
+
+**** Navigation for kuber
+#+begin_src elisp
+(use-package! kubernetes-evil
+  :after kubernetes)
+#+end_src
+
+**** nginx
+#+begin_src elisp
+(use-package! kubernetes-evil
+  :after kubernetes)
+#+end_src
+
+** miscellaneous
+
+I still have some issues with line handling and reaching the end of non-truncated lines sometimes. This is a workaround I had at some point. I'm keeping it around for posterity.
+
+#+begin_src elisp
+;; https://github.com/hlissner/doom-emacs/issues/401
+;; (setq evil-respect-visual-line-mode t)
+#+end_src
+
+For some reason, without this disabled, sh wants to autocomplete everything and search every path, so it is really slow.
+
+#+begin_src elisp
+(after! sh-script
+  (set-company-backend! 'sh-mode nil))
+#+end_src
+
+Fix magit SSH issue
+
+;#+begin_src elisp
+;(when noninteractive
+;  (add-to-list 'doom-env-allow "^SSH_"))
+;#+end_src
+
+Avoid =command not found error
+
+#+begin_src elisp
+;; (exec-path-from-shell-initialize)
+#+end_src
+
+
+
