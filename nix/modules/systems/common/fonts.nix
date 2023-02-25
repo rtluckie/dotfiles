@@ -3,6 +3,6 @@
   fonts.fonts = with pkgs; [
     fira-code
     font-awesome
-    iosevka
+    # iosevka
   ];
 }
