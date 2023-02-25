@@ -3,12 +3,8 @@ MAKE_ARGS := --no-print-directory
 
 SHELL := zsh
 
-# -include $(shell curl -sSL -o .build-harness "https://cloudposse.tools/build-harness"; echo .build-harness)
+-include $(shell curl -sSL -o .build-harness "https://cloudposse.tools/build-harness"; echo .build-harness)
 
-# all: init deps build install run workflows
-
-
-## Create a distribution by coping $PACKAGES from $INSTALL_PATH to $DIST_PATH
 deps:
 	@exit 0
 
@@ -65,4 +61,3 @@ nix/all/%:
 nix/all-nocommit/%:
 	@$(MAKE) $(MAKE_ARGS) nix/build/$*
 	@$(MAKE) $(MAKE_ARGS) nix/darwin/rebuild/switch/$*
-	# @$(MAKE) $(MAKE_ARGS) nix/darwin/rebuild/activate/$*
