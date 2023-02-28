@@ -18,9 +18,11 @@ in {
   };
   config = mkIf cfg.enable (mkMerge [
     {
-      my.env = {
-        RUSTUP_HOME = "$XDG_DATA_HOME/rustup";
-        CARGO_HOME = "$XDG_DATA_HOME/cargo";
+      my.hm.user.home = with config.my.hm; {
+        sessionVariables = {
+          RUSTUP_HOME = "${dataHome}/rust/rustup";
+          CARGO_HOME = "${dataHome}/rust/cargo";
+        };
       };
     }
     {
