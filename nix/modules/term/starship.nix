@@ -28,11 +28,10 @@ in {
           format = lib.concatStrings [
             "$directory"
             "$fill"
-            "$kubernetes"
-            "$fill"
-            "(($aws) ($gcp) $fill)"
-            # "(\[$git_branch $git_commit $git_state $git_status\]$fill)"
-            "$time(|$cmd_duration)(|$status)"
+            "($kubernetes | )"
+            "(($aws)(|$gcp) | )"
+            "($git_branch(|$git_commit)(|$git_state)(|$git_status) | )"
+            "$time(|$cmd_duration)( | $status)"
             "$line_break"
             "$character"
           ];
@@ -76,23 +75,25 @@ in {
           status = {
             disabled = false;
             # style = "bg:blue";
-            symbol = "👎 ";
-            # success_symbol = "👍";
-            format = " [$symbol ]($style)";
+            symbol = "👎";
+            success_symbol = "👍";
+            format = "[$symbol]($style)";
             map_symbol = true;
           };
-
           git_branch = {
             disabled = false;
-            format = " [$symbol](dimmed yellow) [$branch(:$remote_branch)](dimmed green) ";
+            format = "[$symbol](dimmed yellow) [$branch(:$remote_branch)](dimmed green)";
             symbol = "";
             only_attached = true;
-            truncation_length = 4;
-            truncation_symbol = "";
+            # truncation_length = 4;
+            # truncation_symbol = "";
             ignore_branches = [
-              "master"
-              "main"
+              # "master"
+              # "main"
             ];
+          };
+          git_commit = {
+            disabled = false;
           };
           git_status = {
             ahead = "⇡($count)";
@@ -108,12 +109,9 @@ in {
             up_to_date = "✓";
             format = "([$all_status$ahead_behind]($style))";
           };
-          git_commit = {
-            disabled = true;
-          };
           kubernetes = {
             disabled = false;
-            format = "⛵ [$context](dimmed yellow)/[\($namespace\)](dimmed green) ";
+            format = "⛵ [$context](dimmed yellow)(/[\($namespace\)](dimmed green))";
             context_aliases = {
               "gke_.*_.*_ec-us-central1-(?P<var_cluster>.+)" = "$var_cluster";
             };
@@ -125,6 +123,7 @@ in {
           time = {
             disabled = false;
             format = "[$time]($style)";
+            time_format = "%Y.%m.%d %H:%M";
             style = "dimmed yellow";
           };
         };
