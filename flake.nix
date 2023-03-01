@@ -2,18 +2,26 @@
   description = "rluckie's dotfiles";
 
   inputs = {
-    nixpkgs.url = github:nixos/nixpkgs/nixpkgs-unstable;
-    darwin.url = github:LnL7/nix-darwin;
-    home-manager.url = github:nix-community/home-manager;
-    # devenv.url = github:cachix/devenv/v0.2;
-    # devshell.url = github:numtide/devshell;
-    emacs-overlay.url = github:nix-community/emacs-overlay;
-    # flake-utils.url = github:numtide/flake-utils;
-    # nur.url = github:nix-community/nur;
-    rust-overlay.url = github:oxalica/rust-overlay;
-    # follows
-    darwin.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nixpkgs = {url = "github:nixos/nixpkgs/nixpkgs-unstable";};
+    darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
+    flake-utils = {url = "github:numtide/flake-utils";};
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
   };
 
   outputs = inputs @ {
@@ -31,9 +39,14 @@
   }: let
     # inherit (flake-utils.lib) eachDefaultSystem eachSystem;
     inherit (darwin.lib) darwinSystem;
-    inherit (inputs.nixpkgs.lib) attrValues makeOverridable optionalAttrs singleton;
+    inherit
+      (inputs.nixpkgs.lib)
+      attrValues
+      makeOverridable
+      optionalAttrs
+      singleton
+      ;
     overlays = [
-      # nur.overlay
       emacs-overlay.overlay
       rust-overlay.overlays.default
       (final: prev: {devenv = inputs.devenv.defaultPackage.${prev.system};})
@@ -63,7 +76,9 @@
   in {
     darwinConfigurations = {
       example = mkDarwinSystem {modules = [./nix/hosts/example];};
-      gull = (mkDarwinSystem {modules = [./nix/hosts/gull];}).override {system = "aarch64-darwin";};
+      gull = (mkDarwinSystem {modules = [./nix/hosts/gull];}).override {
+        system = "aarch64-darwin";
+      };
     };
     example = self.darwinConfigurations.example.system;
     gull = self.darwinConfigurations.gull.system;
