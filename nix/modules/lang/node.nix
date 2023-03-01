@@ -23,5 +23,12 @@ in {
         nodePackages.yarn
       ];
     }
+    {
+      my.hm.user.programs.zsh.oh-my-zsh.plugins = [
+        "yarn"
+        "node"
+        "npm"
+      ];
+    }
   ]);
 }
