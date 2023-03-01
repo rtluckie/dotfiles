@@ -48,6 +48,7 @@ with lib; let
     (loadModule ./term/utils.nix {})
     (loadModule ./term/wezterm.nix {})
     (loadModule ./term/zsh.nix {})
+    (loadModule ./tools/asdf.nix {})
     (loadModule ./tools/bat.nix {})
     (loadModule ./tools/compression.nix {})
     (loadModule ./tools/dev.nix {})
