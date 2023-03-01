@@ -8,7 +8,6 @@
 with lib; let
   loadModule = file: {condition ? true}: {inherit file condition;};
   allModules = [
-    (loadModule ./options.nix {})
     (loadModule ./editors/emacs.nix {})
     (loadModule ./gui/_1password.nix {})
     (loadModule ./gui/amethyst.nix {})
@@ -40,6 +39,7 @@ with lib; let
     (loadModule ./lang/rust.nix {})
     (loadModule ./misc/apps.nix {})
     (loadModule ./misc/media.nix {})
+    (loadModule ./options.nix {})
     (loadModule ./term/alacritty.nix {})
     (loadModule ./term/gpg.nix {})
     (loadModule ./term/ssh.nix {})
@@ -53,6 +53,7 @@ with lib; let
     (loadModule ./tools/dev.nix {})
     (loadModule ./tools/dircolors.nix {})
     (loadModule ./tools/direnv.nix {})
+    (loadModule ./tools/dyff.nix {})
     (loadModule ./tools/exa.nix {})
     (loadModule ./tools/fd.nix {})
     (loadModule ./tools/fzf.nix {})
