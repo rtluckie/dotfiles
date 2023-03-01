@@ -340,6 +340,10 @@ lsp-ui-imenu is a less helpful alternative.
     (evil-window-down 1)))
 #+END_SRC
 
+** Fix truncated vterm
+#+begin_src emacs-lisp
+ (set-display-table-slot standard-display-table 0 ?\ )
+#+end_src
 ** SRE
 
 *** K8s
