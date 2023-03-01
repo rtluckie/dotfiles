@@ -1,18 +1,18 @@
 {
-  emacsUnstable,
+  pkgs,
   fetchFromGitHub,
   darwin,
 }: let
   emacsPlus = fetchFromGitHub {
     owner = "d12frosted";
     repo = "homebrew-emacs-plus";
-    rev = "61d588ce80fb4282e107f5ab97914e32451c3da1";
-    sha256 = "sha256-xJYEGu9wnndEhUTMVKiFPL1jwq+T6yEoZdYi5A1TTFQ=";
+    rev = "496c1a358122d17b141efbc9d370b12220aeb3d5";
+    sha256 = "sha256-mz1FeBl3K8R/76HavMrUWuFlETv0j4IqXGmLrnAqsWk=";
   };
   patchesDir = emacsPlus + "/patches/emacs-28";
 in
-  emacsUnstable.overrideAttrs (o: rec {
-    pname = "emacsPlusNativeComp";
+  pkgs.emacsGit.overrideAttrs (o: rec {
+    pname = "emacsCustom";
 
     # # https://github.com/cmacrae/emacs/blob/03b4223e56e10a6d88faa151c5804d30b8680cca/flake.nix#L75
     buildInputs = o.buildInputs ++ [darwin.apple_sdk.frameworks.WebKit];
@@ -48,6 +48,7 @@ in
         ln -snf $out/lib/emacs/${o.version}/native-lisp $out/Applications/Emacs.app/Contents/native-lisp
       '';
 
-    # CFLAGS = "-DMAC_OS_X_VERSION_MAX_ALLOWED=110203 -g -O3 -mtune=native -march=native -fomit-frame-pointer";
+    CFLAGS = "-DMAC_OS_X_VERSION_MAX_ALLOWED=110203 -g -O3 -mtune=native -march=native -fomit-frame-pointer";
+
     meta.platforms = ["x86_64-darwin" "aarch64-darwin"];
   })

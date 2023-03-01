@@ -40,5 +40,5 @@ final: prev:
         };
       };
 
-  emacsPlusNativeComp = prev.callPackage ./emacs-plus.nix {};
+  emacsCustom = prev.callPackage ./emacs-custom.nix {};
 }

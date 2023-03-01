@@ -11,7 +11,7 @@
     # alwaysEnsure = true;
     # alwaysTangle = true;
     config = "$HOME/.config/doom/config.org";
-    package = pkgs.emacs;
+    package = pkgs.emacsPlusNativeComp;
     extraEmacsPackages = epkgs: [
       epkgs.vterm
     ];
@@ -29,16 +29,16 @@ in {
 
   config = with lib;
     mkIf cfg.enable (mkMerge [
-      # {
-      #   my.env = {
-      #     # EMACS = "${config.programs.emacs.package}/bin/emacs";
-      #     EMACSDIR = "$HOME/.config/emacs";
-      #     DOOMDIR = "$HOME/.config/doom";
-      #     DOOMLOCALDIR = "$HOME/.config/doom-local";
-      #     DOOMPROFILELOADFILE = "$HOME/.config/doom-local/profiles/load.el";
-      #     PATH = ["$PATH" "$HOME/.config/emacs/bin"];
-      #   };
-      # }
+      {
+        my.env = {
+          # EMACS = "${config.programs.emacs.package}/bin/emacs";
+          EMACSDIR = "$HOME/.config/emacs";
+          DOOMDIR = "$HOME/.config/doom";
+          DOOMLOCALDIR = "$HOME/.config/doom-local";
+          DOOMPROFILELOADFILE = "$HOME/.config/doom-local/profiles/load.el";
+          PATH = ["$PATH" "$HOME/.config/emacs/bin"];
+        };
+      }
       {
         environment.systemPackages = with pkgs; [
           cmake
@@ -53,14 +53,14 @@ in {
         ];
         my.hm.user = {
           home = {
-            sessionPath = ["$HOME/.config/emacs/bin"];
-            sessionVariables = {
-              # EMACS = "${emacsPkg}/bin/emacs";
-              EMACSDIR = "$HOME/.config/emacs";
-              DOOMDIR = "$HOME/.config/doom";
-              DOOMLOCALDIR = "$HOME/.config/doom-local";
-              DOOMPROFILELOADFILE = "$HOME/.config/doom-local/profiles/load.el";
-            };
+            # sessionPath = ["$HOME/.config/emacs/bin"];
+            # sessionVariables = {
+            #   # EMACS = "${emacsPkg}/bin/emacs";
+            #   EMACSDIR = "$HOME/.config/emacs";
+            #   DOOMDIR = "$HOME/.config/doom";
+            #   DOOMLOCALDIR = "$HOME/.config/doom-local";
+            #   DOOMPROFILELOADFILE = "$HOME/.config/doom-local/profiles/load.el";
+            # };
             packages = with pkgs; [
               (aspellWithDicts (ds: [ds.en ds.en-computers ds.en-science]))
               # (ripgrep.override { withPCRE2 = true; })
