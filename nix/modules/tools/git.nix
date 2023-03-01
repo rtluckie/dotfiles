@@ -59,6 +59,14 @@ in {
               };
             };
           }
+          {
+            condition = "gitdir:~/";
+            contents = {
+              url."git@bitbucket.org:".insteadOf = "https://bitbucket.org";
+              url."git@github.com:".insteadOf = "https://github.com";
+              url."git@gitlab.com".insteadOf = "https://gitlab.com";
+            };
+          }
         ];
         signing = {
           key = config.my.gpgKey;
@@ -76,7 +84,6 @@ in {
           commit = {
             template = "~/.config/git/message";
           };
-          url."git@github.com:".insteadOf = "https://github.com";
           core = {
             editor = "$EDITOR";
             autocrlf = false;
