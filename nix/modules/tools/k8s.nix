@@ -34,6 +34,7 @@ in {
         # kubectl
         kubernetes-helm
         kustomize
+        tanka
       ];
     }
     {
