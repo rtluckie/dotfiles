@@ -21,9 +21,9 @@ in {
     {
       homebrew = {
         enable = true;
-        onActivation.autoUpdate = false;
+        onActivation.autoUpdate = true;
         onActivation.cleanup = "zap";
-        global.autoUpdate = false;
+        global.autoUpdate = true;
         global.brewfile = true;
         global.lockfiles = true;
         taps = [
