@@ -33,6 +33,12 @@ in {
         };
       };
     }
+
+    {
+      my.user.packages = with pkgs; [
+        google-cloud-sdk
+      ];
+    }
     {
       my.hm.user.programs.zsh.oh-my-zsh.plugins = [
         "gcloud"
