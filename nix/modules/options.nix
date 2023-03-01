@@ -36,7 +36,6 @@ with lib; let
 in {
   options = with types; {
     my = {
-      user = mkOption {type = options.users.users.type.functor.wrapped;};
       homeDirectory = mkOptStr "${home}";
       name = mkOptStr "Ryan Luckie";
       username = mkOptStr "rluckie";
@@ -49,6 +48,7 @@ in {
       website = mkOptStr "https://lck.dev";
       nixManaged =
         mkOptStr "Nix managed - DO NOT EDIT";
+      user = mkOption {type = options.users.users.type.functor.wrapped;};
       dotfiles = rec {
         dir = mkOpt path ../../.;
         nixDir = mkOpt path "${config.my.dotfiles.dir}/nix";
@@ -83,12 +83,13 @@ in {
   };
   config = {
     users.users."${config.my.username}" = mkAliasDefinitions options.my.user;
+    home-manager.users."${config.my.username}" = mkAliasDefinitions options.my.hm.user;
     my.user = {
       inherit home;
       description = "Primary user account";
     };
-
-    home-manager.users."${config.my.username}" = mkAliasDefinitions options.my.hm.user;
+    home-manager.useGlobalPkgs = true;
+    home-manager.useUserPackages = false;
     my.hm.user = {
       xdg = {
         enable = true;
