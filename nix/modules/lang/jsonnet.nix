@@ -19,7 +19,7 @@ in {
   config = mkIf cfg.enable (mkMerge [
     {
       my.user.packages = with pkgs; [
-        jsonnet
+        go-jsonnet
         jsonnet-bundler
         jsonnet-language-server
       ];
