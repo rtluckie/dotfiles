@@ -44,6 +44,7 @@ in {
       my.hm.user.programs.zsh.oh-my-zsh.plugins = [
         "pip"
         "pipenv"
+        "poetry"
         "pyenv"
         "pylint"
         "python"
