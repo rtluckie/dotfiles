@@ -95,8 +95,8 @@ in {
               [selected_scheme] = scheme
             },
             color_scheme = selected_scheme,
-            font = wezterm.font("Fira Code"),
-            font_size = 24.0,
+            font = wezterm.font("${config.my.fonts.sans.name}"),
+            font_size = 22,
             tab_bar_at_bottom = true,
             tab_max_width = 96,
             hide_tab_bar_if_only_one_tab = true,
@@ -142,8 +142,8 @@ in {
             },
 
             window_frame = {
-              font = wezterm.font({family="Fira Code", weight="Bold"}),
-              font_size = 22.0,
+              font = wezterm.font({family="${config.my.fonts.sans.name}", weight="Bold"}),
+              font_size = 22,
             },
             window_decorations = "RESIZE",
             window_padding = {

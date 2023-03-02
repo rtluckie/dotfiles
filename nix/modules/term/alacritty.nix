@@ -25,18 +25,18 @@ in {
         settings = {
           font = {
             normal = {
-              family = config.my.font;
+              family = config.my.fonts.sans.name;
               style = "Regular";
             };
             bold = {
-              family = config.my.font;
+              family = config.my.fonts.sans.name;
               style = "Bold";
             };
             italic = {
-              family = config.my.font;
+              family = config.my.fonts.sans.name;
               style = "Italic";
             };
-            size = 18;
+            size = toInt config.my.fonts.sans.size;
           };
           cursor.style = "Beam";
           key_bindings = [

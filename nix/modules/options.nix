@@ -79,10 +79,26 @@ in {
         dataHome = mkOpt' path "${home}/.local/share" "Absolute path to directory holding application data.";
         stateHome = mkOpt' path "${home}/.local/state" "Absolute path to directory holding application states.";
       };
-      fonts = {
-        serif = mkOpt' attrs defaultFonts.serif "Primary serif font";
-        sans = mkOpt' attrs defaultFonts.sans "Primary sans font";
+      fonts = mkOption {
+        type = attrsOf (attrsOf (oneOf [str package int float]));
+        default = with pkgs; {
+          sans = {
+            name = "Fira Code";
+            package = fira-code;
+            size = 22;
+          };
+          serif = {
+            name = "Source Serif 4";
+            package = fira-code;
+            size = 22;
+          };
+        };
       };
+
+      # fonts = {
+      #   serif = mkOpt' attrs defaultFonts.serif "Primary serif font";
+      #   sans = mkOpt' attrs defaultFonts.sans "Primary sans font";
+      # };
       env = mkOption {
         type = attrsOf (oneOf [str path (listOf (either str path))]);
         apply =
