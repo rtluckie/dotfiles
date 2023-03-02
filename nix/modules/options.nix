@@ -7,6 +7,17 @@
   ...
 }:
 with lib; let
+  defaultFonts = with pkgs; {
+    sans = {
+      name = "Fira Code";
+      package = fira-code;
+    };
+    serif = {
+      name = "Source Serif 4";
+      package = fira-code;
+    };
+  };
+
   mkOptStr = value:
     mkOption {
       type = with types; uniq str;
@@ -29,6 +40,7 @@ with lib; let
       type = types.bool;
       example = true;
     };
+
   home =
     if pkgs.stdenv.isDarwin
     then "/Users/${config.my.username}"
@@ -67,6 +79,10 @@ in {
         dataHome = mkOpt' path "${home}/.local/share" "Absolute path to directory holding application data.";
         stateHome = mkOpt' path "${home}/.local/state" "Absolute path to directory holding application states.";
       };
+      fonts = {
+        serif = mkOpt' attrs defaultFonts.serif "Primary serif font";
+        sans = mkOpt' attrs defaultFonts.sans "Primary sans font";
+      };
       env = mkOption {
         type = attrsOf (oneOf [str path (listOf (either str path))]);
         apply =
@@ -76,9 +92,7 @@ in {
             then concatMapStringsSep ":" (x: toString x) v
             else (toString v));
         default = {};
-        description = "TODO";
       };
-      font = mkOptStr "Fira Code";
     };
   };
   config = {
@@ -100,7 +114,6 @@ in {
         dataHome = mkAliasDefinitions options.my.hm.dataHome;
         stateHome = mkAliasDefinitions options.my.hm.stateHome;
       };
-
       home = {
         # # Necessary for home-manager to work with flakes, otherwise it will
         # # look for a nixpkgs channel.

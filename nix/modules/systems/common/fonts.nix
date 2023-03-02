@@ -1,8 +1,14 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  config,
+  options,
+  inputs,
+  ...
+}: {
   fonts.fontDir.enable = true;
   fonts.fonts = with pkgs; [
-    fira-code
     font-awesome
-    # iosevka
+    "${config.my.fonts.serif.package}"
   ];
 }

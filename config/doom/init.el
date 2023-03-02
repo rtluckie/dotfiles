@@ -38,7 +38,7 @@
     ;;neotree
     ophints
     (popup +defaults)
-    ;; tabs
+   ;; tabs
     (treemacs +lsp)
     unicode
     (vc-gutter +pretty)

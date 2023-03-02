@@ -28,4 +28,5 @@
   # modules.tools.yabai.enable = true;
   # modules.tools.skhd.enable = true;
   modules.editors.emacs.enable = true;
+  modules.editors.emacs.doom.enable = true;
 }

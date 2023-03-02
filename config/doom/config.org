@@ -1,25 +1,3 @@
--*- org -*-
-
-#+TITLE: emacs literate configuration
-#+AUTHOR: Ryan Luckie
-#+EMAIL: rtluckie@gmail.com
-#+STARTUP: overview
-
-* rluckie's literate doom configuration
-
-According to [[https://nullprogram.com/blog/2016/12/22/][this blog]], this lexical-binding can improve performance.
-
-#+begin_src elisp
-;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
-#+end_src
-
-User identification. You can find more information in the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/User-Identification.html][official documentation]].
-
-#+begin_src elisp
-(setq
-  user-full-name "Ryan Luckie"
-  user-mail-address "rtluckie@gmail.com")
-#+end_src
 
 ** Display configuration
 *** Font
@@ -28,9 +6,7 @@ I am still undecided on usage of variable pitch font. I cannot recall what issue
 
 #+begin_src elisp
 
- (setq font "Fira Code" )
  (setq sans-font font )
- (setq serif-font "Source Serif 4" )
  (setq font-size 24 )
  (setq big-font-size 24 )
  (setq
@@ -51,10 +27,10 @@ I am still undecided on usage of variable pitch font. I cannot recall what issue
 #+end_src
 
 #+begin_src elisp
-(defun rtl-doom-modeline--font-height ()
+(defun self-doom-modeline--font-height ()
   "Calculate the actual char height of the mode-line."
   (+ (frame-char-height) 2))
-(advice-add #'doom-modeline--font-height :override #'rtl-doom-modeline--font-height)
+(advice-add #'doom-modeline--font-height :override #'self-doom-modeline--font-height)
 #+end_src
 
 #+begin_src elisp
@@ -169,15 +145,13 @@ This is suggested [[https://github.com/hlissner/doom-emacs/issues/2424#issuecomm
 This is the directory in which emacs should look for org files that I use for agenda. I link files here from elsewhere.
 
 #+begin_src elisp
-(setq org-directory "~/projects/github.com/rtluckie/org")
-;; (after! org
-;;   (setq org-agenda-files '("~/projects/github.com/rtluckie/notes")))
+(setq org-directory (format "~/projects/github.com/%s/org" user-username))
 #+end_src
 
 When the pointer is over a link in org-mode ~SPC m l y~ will yank that link.
 
 #+begin_src elisp
-(defun rtluckie/org-link-yank (&optional arg)
+(defun self/org-link-yank (&optional arg)
   "Extract URL from org-mode link and add it to kill ring."
   (interactive "P")
   (let* ((link (org-element-lineage (org-element-context) '(link) t))
@@ -191,7 +165,7 @@ When the pointer is over a link in org-mode ~SPC m l y~ will yank that link.
       :map org-mode-map
       :localleader
       (:prefix  ("l" . "links")
-       "y" #'rtluckie/org-link-yank))
+       "y" #'self/org-link-yank))
 #+end_src
 
 While org's agenda todo list is usually sufficient, this let's you collapse a current org-mode file to expose only the TODO's within.
@@ -286,7 +260,7 @@ lsp-ui-imenu is a less helpful alternative.
 *** Wezterm
 
 #+begin_src elisp
-(defun rtl-open-wezterm-right-here ()
+(defun self-open-wezterm-right-here ()
   "Open or switch kitty to root directory of current project."
   (interactive)
   (let* ((cmd (concat "open -a wezterm.app --args \"cd\" " default-directory)))
@@ -298,7 +272,7 @@ lsp-ui-imenu is a less helpful alternative.
 *** Copy path current dir
 
 #+BEGIN_SRC emacs-lisp
-(defun rtl-copy-pwd ()
+(defun self-copy-pwd ()
   "Copy PWD command to clipboard"
   (interactive)
   (when (buffer-file-name)
@@ -307,7 +281,7 @@ lsp-ui-imenu is a less helpful alternative.
 
 *** Copy current file name
 #+BEGIN_SRC emacs-lisp
-(defun rtl-copy-file-name ()
+(defun self-copy-file-name ()
   "Copy file name command to clipboard"
   (interactive)
   (when (buffer-file-name)
@@ -316,7 +290,7 @@ lsp-ui-imenu is a less helpful alternative.
 
 *** Copy full path
 #+BEGIN_SRC emacs-lisp
-(defun rtl-copy-full-path ()
+(defun self-copy-full-path ()
   "Copy full path till file to clipboard"
   (interactive)
   (when (buffer-file-name)
@@ -324,7 +298,7 @@ lsp-ui-imenu is a less helpful alternative.
 #+END_SRC
 ** Open vterm for current buffer
 #+BEGIN_SRC emacs-lisp
-(defun rtl-vterm-change-current-directory-to-active-buffer-pwd ()
+(defun self-vterm-change-current-directory-to-active-buffer-pwd ()
   "Just exec CD to pwd of active buffer."
   (interactive)
   (when-let* ((file-name (buffer-file-name))

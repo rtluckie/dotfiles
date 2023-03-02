@@ -8,7 +8,7 @@
 with lib; let
   loadModule = file: {condition ? true}: {inherit file condition;};
   allModules = [
-    (loadModule ./editors/emacs.nix {})
+    (loadModule ./editors/emacs {})
     (loadModule ./gui/_1password.nix {})
     (loadModule ./gui/amethyst.nix {})
     (loadModule ./gui/brave-browser.nix {})
