@@ -9,7 +9,11 @@ with lib; let
 in {
   options = {
     modules.tools.yabai = {
-      enable = mkEnableOption "tools.yabai";
+      enable =
+        mkEnableOption "tools.yabai"
+        // {
+          default = false;
+        };
     };
   };
 

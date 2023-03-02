@@ -9,7 +9,11 @@ with lib; let
 in {
   options = {
     modules.term.alacritty = {
-      enable = mkEnableOption "term.alacritty";
+      enable =
+        mkEnableOption "term.alacritty"
+        // {
+          default = false;
+        };
     };
   };
 

@@ -26,6 +26,7 @@ in {
         unzip
         xz
         zip
+        zlib
         zstd
       ];
     }

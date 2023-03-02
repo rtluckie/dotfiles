@@ -19,6 +19,11 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
+      environment.systemPackages = with pkgs; [
+        git
+      ];
+    }
+    {
       my.user.packages = with pkgs; [
         gitAndTools.delta
         gitAndTools.hub

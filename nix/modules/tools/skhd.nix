@@ -9,7 +9,11 @@ with lib; let
 in {
   options = {
     modules.tools.skhd = {
-      enable = mkEnableOption "tools.skhd";
+      enable =
+        mkEnableOption "tools.skhd"
+        // {
+          default = false;
+        };
     };
   };
 

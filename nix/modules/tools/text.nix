@@ -25,6 +25,7 @@ in {
         gnused
         graphviz
         less
+        pandoc
         plantuml
         shellcheck
         yq-go
