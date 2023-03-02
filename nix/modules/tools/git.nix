@@ -65,7 +65,7 @@ in {
             };
           }
           {
-            condition = "gitdir:~/";
+            condition = "gitdir:~/projects/";
             contents = {
               url."git@bitbucket.org:".insteadOf = "https://bitbucket.org/";
               url."git@github.com:".insteadOf = "https://github.com/";
