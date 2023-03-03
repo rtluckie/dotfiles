@@ -20,11 +20,17 @@ in {
   config = mkIf cfg.enable (mkMerge [
     {
       my.user.packages = with pkgs; [
-        curl
-        wget
-        iftop
-        speedtest-cli
         bind
+        curl
+        iftop
+        nmap
+        speedtest-cli
+        wget
+      ];
+    }
+    {
+      my.hm.user.programs.zsh.oh-my-zsh.plugins = [
+        "nmap"
       ];
     }
   ]);
