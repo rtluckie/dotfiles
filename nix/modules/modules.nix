@@ -51,6 +51,7 @@ with lib; let
     (loadModule ./term/zsh {})
     (loadModule ./tools/asdf.nix {})
     (loadModule ./tools/bat.nix {})
+    (loadModule ./tools/cassandra.nix {})
     (loadModule ./tools/compression.nix {})
     (loadModule ./tools/dev.nix {})
     (loadModule ./tools/dircolors.nix {})
