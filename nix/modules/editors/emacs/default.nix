@@ -1,1 +1,1 @@
-{imports = [./generic.nix ./doom.nix];}
+{imports = [./main.nix ./doom.nix];}
