@@ -21,6 +21,12 @@ in {
       my.hm.user.programs.exa = {
         enable = true;
         enableAliases = true;
+        git = true;
+        icons = true;
+        extraOptions = [
+          "--group-directories-first"
+          "--header"
+        ];
       };
     }
   ]);
