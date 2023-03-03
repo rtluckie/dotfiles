@@ -28,5 +28,21 @@ in {
         "zoxide"
       ];
     }
+    {
+      my.hm.user = {
+        home = {
+          sessionPath = [];
+          sessionVariables = {
+            # https://github.com/ajeetdsouza/zoxide#environment-variables
+            "_ZO_DATA_DIR" = "$HOME/.local/share/zoxide";
+            "_ZO_ECHO" = 0;
+            "_ZO_EXCLUDE_DIRS" = "";
+            "_ZO_FZF_OPTS" = "$_FZF_DEFAULT_OPTS --select-1";
+            "_ZO_MAXAGE" = 10000;
+            "_ZO_RESOLVE_SYMLINKS" = 1;
+          };
+        };
+      };
+    }
   ]);
 }
