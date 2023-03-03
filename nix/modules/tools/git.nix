@@ -129,8 +129,14 @@ in {
     }
     {
       my.hm.user.programs.zsh.oh-my-zsh.plugins = [
-        "git"
         "gh"
+        "git"
+        "git-auto-fetch"
+        "git-escape-magic"
+        "git-extras"
+        "gitfast"
+        "github"
+        "gitignore"
       ];
     }
     {
