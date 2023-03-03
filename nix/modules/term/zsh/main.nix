@@ -39,7 +39,7 @@ in {
     {
       my.hm.user.programs.zsh = {
         enable = true;
-        enableCompletion = false;
+        enableCompletion = true;
         enableAutosuggestions = true;
         enableSyntaxHighlighting = true;
         autocd = true;
@@ -58,18 +58,21 @@ in {
         oh-my-zsh.enable = true;
       };
     }
-    {
-      my.hm.user.programs.zsh.plugins = [
-        {
-          name = "zsh-autocomplete";
-          src = pkgs.fetchFromGitHub {
-            owner = "marlonrichert";
-            repo = "zsh-autocomplete";
-            rev = "main";
-            sha256 = "sha256-+w9+d7cYmPBdnqWgooh+OmscavB9JL7dVqOQyj8jJ7E=";
-          };
-        }
-      ];
-    }
+    # {
+    #   my.hm.user.programs.zsh.initExtra = ''
+    #     zstyle ':autocomplete:*' fzf-completion yes
+    #   '';
+    #   my.hm.user.programs.zsh.plugins = [
+    #     {
+    #       name = "zsh-autocomplete";
+    #       src = pkgs.fetchFromGitHub {
+    #         owner = "marlonrichert";
+    #         repo = "zsh-autocomplete";
+    #         rev = "main";
+    #         sha256 = "sha256-+w9+d7cYmPBdnqWgooh+OmscavB9JL7dVqOQyj8jJ7E=";
+    #       };
+    #     }
+    #   ];
+    # }
   ]);
 }
