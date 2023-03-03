@@ -39,5 +39,10 @@ in {
         pkg-config
       ];
     }
+    {
+      my.hm.user.programs.zsh.oh-my-zsh.plugins = [
+        "gnu-utils"
+      ];
+    }
   ]);
 }
