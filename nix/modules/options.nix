@@ -94,11 +94,10 @@ in {
           };
         };
       };
-
-      # fonts = {
-      #   serif = mkOpt' attrs defaultFonts.serif "Primary serif font";
-      #   sans = mkOpt' attrs defaultFonts.sans "Primary sans font";
-      # };
+      pythonPackages = mkOption {
+        type = listOf packages;
+        default = [];
+      };
       env = mkOption {
         type = attrsOf (oneOf [str path (listOf (either str path))]);
         apply =
