@@ -37,7 +37,7 @@ in {
         moreutils
         pkg-config
         sqlite
-        texinfo
+        # texinfo
         xz
       ];
     }
