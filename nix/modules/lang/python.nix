@@ -22,22 +22,24 @@ in {
   config = mkIf cfg.enable (mkMerge [
     {
       my.user.packages = with pkgs; [
-        (python3.withPackages (ps:
-          with ps; [
-            black
-            ipython
-            isort
-            nose
-            pip
-            pyflakes
-            pylint
-            pyright
-            pytest
-            python-lsp-server
-            setuptools
-            virtualenv
-            virtualenvwrapper
-          ]))
+        (python3.withPackages (
+          ps:
+            with ps; [
+              black
+              ipython
+              isort
+              nose
+              pip
+              pyflakes
+              pylint
+              pyright
+              pytest
+              python-lsp-server
+              setuptools
+              virtualenv
+              virtualenvwrapper
+            ]
+        ))
         poetry
         pipenv
         thefuck
