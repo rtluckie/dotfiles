@@ -376,5 +376,9 @@ Avoid =command not found error
 ;; (exec-path-from-shell-initialize)
 #+end_src
 
+Prevent git commit message projectile popup
 
-
+#+begin_src elisp
+(setq projectile-globally-ignored-directories '("/private")
+)
+#+end_src
