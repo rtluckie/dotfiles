@@ -19,7 +19,7 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      my.user.packages = with pkgs; [
+      environment.systemPackages = with pkgs; [
         gnutar
         p7zip
         unrar

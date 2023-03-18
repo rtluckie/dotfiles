@@ -19,7 +19,7 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      my.user.packages = with pkgs; [
+      environment.systemPackages = with pkgs; [
         gawk
         gnugrep
         gnused
@@ -27,7 +27,6 @@ in {
         less
         pandoc
         plantuml
-        shellcheck
         yq-go
       ];
     }

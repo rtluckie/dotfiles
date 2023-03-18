@@ -26,6 +26,7 @@ in {
         nmap
         speedtest-cli
         wget
+        ipcalc
       ];
     }
     {

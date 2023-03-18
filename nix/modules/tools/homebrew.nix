@@ -23,6 +23,7 @@ in {
         enable = true;
         onActivation.autoUpdate = true;
         onActivation.cleanup = "zap";
+        # onActivation.cleanup = "none";
         global.autoUpdate = true;
         global.brewfile = true;
         global.lockfiles = true;

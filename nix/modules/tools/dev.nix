@@ -20,6 +20,25 @@ in {
   config = mkIf cfg.enable (mkMerge [
     {
       environment.systemPackages = with pkgs; [
+        autoconf
+        cmake
+        coreutils
+        # coreutils-prefixed
+        gawk
+        gcc
+        gnumake
+        gnused
+        gnutar
+        gnutls
+        libgccjit
+        librsvg
+        libtool
+        mailutils
+        moreutils
+        pkg-config
+        sqlite
+        texinfo
+        xz
       ];
     }
     {
