@@ -100,7 +100,7 @@
     ;;taskrunner
     terraform
     tmux
-    ;;tree-sitter
+    tree-sitter
     ;;upload
 
     :os
@@ -168,7 +168,7 @@
     ;;swift
     ;;terra
     web
-    (yaml +lsp)
+    (yaml +lsp +tree-sitter)
     ;;zig
 
     :app

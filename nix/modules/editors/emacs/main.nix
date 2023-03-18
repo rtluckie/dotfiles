@@ -6,6 +6,7 @@
   inputs,
   ...
 }: let
+  emacsVersion = "28";
   cfg = config.modules.editors.emacs;
 in {
   options = with lib; {
@@ -82,6 +83,7 @@ in {
           sqlite
           # texinfo
           tree-sitter
+          tree-sitter-grammars.tree-sitter-yaml
           x265
           # xorg.libX11
           # xorg.libXau
@@ -139,29 +141,34 @@ in {
           "libgccjit"
           "texinfo"
           "gcc"
-          # {
-          #   name = "d12frosted/emacs-plus/emacs-plus@29";
-          #   args = [
-          #     "ignore-dependencies"
-          #     "with-native-comp"
-          #     "with-memeplex-slim-icon"
-          #     "with-xwidgets"
-          #     "with-imagemagick"
-          #     "with-mailutils"
-          #   ];
-          # }
           {
-            name = "d12frosted/emacs-plus/emacs-plus@30";
+            name = "d12frosted/emacs-plus/emacs-plus@${emacsVersion}";
             args = [
               "ignore-dependencies"
+              "with-no-titlebar-and-round-corners"
               "with-native-comp"
               "with-memeplex-slim-icon"
               "with-xwidgets"
               "with-imagemagick"
               "with-mailutils"
             ];
+            restart_service = true;
           }
         ];
+      }
+      {
+        my.hm.user.home.activation.emacs = with pkgs;
+          inputs.home-manager.lib.hm.dag.entryAfter ["writeBoundary"] ''
+            export EMACS_VERSION=${emacsVersion};
+            export APP_SPATH="/opt/homebrew/opt/emacs-plus@$EMACS_VERSION/Emacs.app";
+            export APP_DPATH='/Applications/Emacs.app'
+            if [[ -d $APP_DPATH ]]; then
+               rm -fr $APP_DPATH;
+            fi
+            if [[ -d $APP_SPATH ]]; then
+              cp -r $APP_SPATH /Applications/
+            fi
+          '';
       }
     ]);
 }
