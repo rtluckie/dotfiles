@@ -19,18 +19,9 @@ in {
   };
 
   config = with lib;
-    mkIf cfg.enable (mkMerge [
+    mkIf config.modules.editors.emacs.enable (mkMerge [
       {
         environment.systemPackages = with pkgs; [
-          cmake
-          coreutils-prefixed
-          gcc
-          gnumake
-          libgccjit
-          libtool
-          moreutils
-          shellcheck
-          shfmt
         ];
         my.hm.user = {
           home = {
@@ -41,28 +32,6 @@ in {
               DOOMPROFILELOADFILE = "$HOME/.config/doom-local/profiles/load.el";
             };
             packages = with pkgs; [
-              (aspellWithDicts (ds: [ds.en ds.en-computers ds.en-science]))
-
-              # gmp
-              # gnutls
-              # libgccjit
-              # libjpeg
-              # librsvg
-              editorconfig-core-c
-              gnutls
-              html-tidy
-              imagemagick
-              languagetool
-              nodePackages.bash-language-server
-              nodePackages.eslint
-              nodePackages.javascript-typescript-langserver
-              nodePackages.js-beautify
-              nodePackages.stylelint
-              nodePackages.unified-language-server
-              nodePackages.yaml-language-server
-              taplo-lsp
-              texlive.combined.scheme-medium
-              wordnet
             ];
           };
         };
