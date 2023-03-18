@@ -62,7 +62,6 @@ in {
         inputs.home-manager.lib.hm.dag.entryAfter ["writeBoundary"] ''
           export PATH=${pkgs.lib.makeBinPath [curl git]}:$PATH
           export PYENV_ROOT="$HOME/.local/share/pyenv"
-          echo $PYENV_ROOT
           if [[ ! -d $PYENV_ROOT ]]; then
             echo "Pyenv not installed. Install now..."
             curl --silent https://pyenv.run | bash

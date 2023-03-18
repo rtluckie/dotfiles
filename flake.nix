@@ -11,11 +11,15 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    emacs-overlay = {
-      url = "github:nix-community/emacs-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
-    };
+    # cemacs = {
+    #   url = "github:cmacrae/emacs";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    # emacs-overlay = {
+    #   url = "github:nix-community/emacs-overlay";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   inputs.flake-utils.follows = "flake-utils";
+    # };
     flake-utils = {url = "github:numtide/flake-utils";};
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
@@ -33,7 +37,8 @@
     # devshell,
     # nur,
     # flake-utils,
-    emacs-overlay,
+    # emacs-overlay,
+    # cemacs,
     rust-overlay,
     ...
   }: let
@@ -47,7 +52,8 @@
       singleton
       ;
     overlays = [
-      emacs-overlay.overlay
+      # emacs-overlay.overlay
+      # cemacs.overlay
       rust-overlay.overlays.default
       (final: prev: {devenv = inputs.devenv.defaultPackage.${prev.system};})
       (import ./nix/overlays)
