@@ -24,14 +24,20 @@ in {
       ];
     }
     {
-      my.user.packages = with pkgs; [
-        gitAndTools.delta
-        gitAndTools.hub
-        gitAndTools.gh
-        gitAndTools.tig
-        gitAndTools.lazygit
-        gitAndTools.gitui
+      my.hm.user.programs.zsh.profileExtra = ''
+        export GIT_AUTO_FETCH_INTERVAL=1200
+      '';
+    }
+    {
+      my.hm.user.home.packages = with pkgs; [
         exiftool
+        gitAndTools.delta
+        gitAndTools.gh
+        gitAndTools.gitui
+        gitAndTools.hub
+        gitAndTools.lazygit
+        gitAndTools.tig
+        meld
       ];
     }
     {

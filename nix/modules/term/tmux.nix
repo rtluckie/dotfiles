@@ -94,7 +94,7 @@ in {
       ];
     }
     {
-      my.user.packages = with pkgs; [
+      my.hm.user.home.packages = with pkgs; [
         reattach-to-user-namespace
       ];
     }

@@ -19,7 +19,7 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      my.user.packages = with pkgs; [jetbrains.pycharm-professional];
+      my.hm.user.home.packages = with pkgs; [jetbrains.pycharm-professional];
     }
   ]);
 }

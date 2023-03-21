@@ -19,7 +19,7 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      my.user.packages = with pkgs; [pkgs.postman];
+      my.hm.user.home.packages = with pkgs; [pkgs.postman];
     }
   ]);
 }

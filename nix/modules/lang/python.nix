@@ -21,7 +21,7 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      my.user.packages = with pkgs; [
+      my.hm.user.home.packages = with pkgs; [
         (python3.withPackages (
           ps:
             with ps; [

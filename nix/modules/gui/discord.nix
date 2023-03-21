@@ -19,7 +19,9 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      my.user.packages = with pkgs; [pkgs.discord];
+      my.hm.user.home.packages = with pkgs; [
+        discord
+      ];
     }
   ]);
 }

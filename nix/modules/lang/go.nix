@@ -50,7 +50,7 @@ in {
     }
     {my.env.PATH = ["$HOME/.local/bin/go" "$PATH"];}
     {
-      my.user.packages = with pkgs; [
+      my.hm.user.home.packages = with pkgs; [
         gocode
         gomodifytags
         gopls

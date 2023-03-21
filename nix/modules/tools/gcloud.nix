@@ -19,7 +19,7 @@ in {
       my.env = {
         PATH = [
           "$PATH"
-          "$HOME/.local/share/google-cloud-sdk/bin"
+          "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin"
         ];
       };
     }
@@ -28,15 +28,14 @@ in {
         home = {
           sessionPath = ["$HOME/.config/krew/bin"];
           sessionVariables = {
-            CLOUDSDK_HOME = "$HOME/.local/share/google-cloud-sdk";
+            CLOUDSDK_HOME = "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/";
           };
         };
       };
     }
-
     {
-      my.user.packages = with pkgs; [
-        google-cloud-sdk
+      homebrew.casks = [
+        "google-cloud-sdk"
       ];
     }
     {

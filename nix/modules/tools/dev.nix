@@ -42,7 +42,7 @@ in {
       ];
     }
     {
-      my.user.packages = with pkgs; [
+      my.hm.user.home.packages = with pkgs; [
         nodePackages.prettier
         nodePackages.prettier-plugin-toml
         sqlite

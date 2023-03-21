@@ -23,7 +23,7 @@ in {
       ];
     }
     {
-      my.user.packages = with pkgs; [
+      my.hm.user.home.packages = with pkgs; [
         redis
       ];
     }

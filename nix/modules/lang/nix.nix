@@ -18,7 +18,7 @@ in {
   };
   config = mkIf cfg.enable (mkMerge [
     {
-      my.user.packages = with pkgs; [
+      my.hm.user.home.packages = with pkgs; [
         # nix-du
         alejandra
         cachix

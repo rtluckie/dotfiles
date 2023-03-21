@@ -17,9 +17,14 @@ in {
     };
   };
   config = mkIf cfg.enable (mkMerge [
+    # {
+    #   homebrew.casks = [
+    #     "slack"
+    #   ];
+    # }
     {
-      homebrew.casks = [
-        "slack"
+      my.hm.user.home.packages = with pkgs; [
+        slack
       ];
     }
   ]);
