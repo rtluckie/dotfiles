@@ -19,7 +19,9 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      my.user.packages = with pkgs; [jetbrains.goland];
+      my.hm.user.home.packages = with pkgs; [
+        jetbrains.goland
+      ];
     }
   ]);
 }
