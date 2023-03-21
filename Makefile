@@ -32,6 +32,18 @@ nix/flake/update:
 format:
 	nix develop --command bash -c 'treefmt .'
 
+## nix/clean
+nix/clean:
+	@echo "cleaning repo..."
+	@rm -fr result
+
+## nix/gc
+nix/gc:
+	@echo "Collecting garbage..."
+	@nix-store --gc
+	@nix-collect-garbage --delete-old
+	@nix-collect-garbage -d
+
 ## nix build
 nix/build/%:
 	@echo "Build"
