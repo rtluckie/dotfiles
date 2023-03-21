@@ -44,5 +44,10 @@ in {
         };
       };
     }
+    {
+      my.hm.user.home.shellAliases = {
+        cd = "z";
+      };
+    }
   ]);
 }
