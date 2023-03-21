@@ -66,10 +66,10 @@
         system = "x86_64-darwin";
         modules =
           [
+            home-manager.darwinModules.home-manager
+            {nixpkgs.overlays = overlays;}
             ./nix/modules/systems/common
             ./nix/modules/systems/darwin
-            {nixpkgs.overlays = overlays;}
-            home-manager.darwinModules.home-manager
             ({lib, ...}: {
               imports = import ./nix/modules/modules.nix {
                 inherit lib;

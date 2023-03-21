@@ -7,16 +7,6 @@
   ...
 }:
 with lib; let
-  defaultFonts = with pkgs; {
-    sans = {
-      name = "Fira Code";
-      package = fira-code;
-    };
-    serif = {
-      name = "Source Serif 4";
-      package = fira-code;
-    };
-  };
 
   mkOptStr = value:
     mkOption {
@@ -58,8 +48,7 @@ in {
       timeZone = mkOptStr "America/Chicago";
       hostname = mkOptStr "somehostname";
       website = mkOptStr "https://lck.dev";
-      nixManaged =
-        mkOptStr "Nix managed - DO NOT EDIT";
+      nixManaged = mkOptStr "Nix managed - DO NOT EDIT";
       user = mkOption {type = options.users.users.type.functor.wrapped;};
       dotfiles = rec {
         dir = mkOpt path ../../.;
@@ -118,7 +107,7 @@ in {
       description = "Primary user account";
     };
     home-manager.useGlobalPkgs = true;
-    home-manager.useUserPackages = false;
+    home-manager.useUserPackages = true;
     my.hm.user = {
       xdg = {
         enable = true;
@@ -141,7 +130,6 @@ in {
       };
 
       programs = {
-        # Let Home Manager install and manage itself.
         home-manager.enable = true;
       };
     };
