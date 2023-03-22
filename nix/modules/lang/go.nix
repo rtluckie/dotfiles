@@ -30,6 +30,28 @@ with lib; let
       ldflags = ["-s" "-w" "-extldflags '-static'"];
       # subPackages = ["mixtool"];
     };
+    xk6 = pkgs.buildGoModule rec {
+      pname = "xk6";
+      version = "master";
+      # goPackagePath = ".";
+      # goPackagePath = "github.com/monitoring-mixin/mixtool";
+
+      src = pkgs.fetchFromGitHub {
+        owner = "grafana";
+        repo = "xk6";
+        rev = "${version}";
+        sha256 = "sha256-jZjbt0zBPdsb/xl72yRLp8IKGDf4916YzK2WHJwl9HE=";
+      };
+
+      vendorSha256 = "sha256-8cJeU8KfonnreIHHFeDJmz6bpjBtuX2DZ44kwFwxaFg=";
+      # deleteVendor = true;
+      postConfigure = ''
+        export CGO_ENABLED=0
+      '';
+
+      ldflags = ["-s" "-w" "-extldflags '-static'"];
+      # subPackages = ["cmd/xk6"];
+    };
   };
 in {
   options = {
