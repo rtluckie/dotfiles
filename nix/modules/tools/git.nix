@@ -18,11 +18,11 @@ in {
   };
 
   config = mkIf cfg.enable (mkMerge [
-    {
-      environment.systemPackages = with pkgs; [
-        git
-      ];
-    }
+    # {
+    #   my.hm.user.home.packages = with pkgs; [
+    #     git
+    #   ];
+    # }
     {
       my.hm.user.programs.zsh.profileExtra = ''
         export GIT_AUTO_FETCH_INTERVAL=1200
@@ -30,6 +30,7 @@ in {
     }
     {
       my.hm.user.home.packages = with pkgs; [
+        git
         exiftool
         gitAndTools.delta
         gitAndTools.gh
@@ -37,7 +38,6 @@ in {
         gitAndTools.hub
         gitAndTools.lazygit
         gitAndTools.tig
-        meld
       ];
     }
     {

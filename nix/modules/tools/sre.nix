@@ -5,12 +5,12 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.tools.network;
+  cfg = config.modules.tools.sre;
 in {
   options = {
-    modules.tools.network = {
+    modules.tools.sre = {
       enable =
-        mkEnableOption "tools.network"
+        mkEnableOption "tools.sre"
         // {
           default = true;
         };
@@ -20,20 +20,11 @@ in {
   config = mkIf cfg.enable (mkMerge [
     {
       my.hm.user.home.packages = with pkgs; [
-        bind
-        curl
-        dig
-        iftop
-        inetutils
-        ipcalc
-        nmap
-        speedtest-cli
-        wget
+        k6
       ];
     }
     {
       my.hm.user.programs.zsh.oh-my-zsh.plugins = [
-        "nmap"
       ];
     }
   ]);
