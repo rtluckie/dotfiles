@@ -31,9 +31,10 @@ in {
       my.hm.user.home.packages = with pkgs; [
         argocd
         krew
-        # kubectl
+        kubectl
         kubernetes-helm
         kustomize
+        stern
         tanka
       ];
     }
