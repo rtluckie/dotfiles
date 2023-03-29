@@ -20,7 +20,7 @@ in {
   config = mkIf cfg.enable (mkMerge [
     {
       my.hm.user.home.sessionVariables = {
-        ZSH_TMUX_AUTOSTART = "true";
+        ZSH_TMUX_AUTOSTART = "false";
         ZSH_TMUX_CONFIG = "$HOME/.config/tmux/tmux.conf";
       };
     }
