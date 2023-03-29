@@ -7,7 +7,6 @@
   ...
 }:
 with lib; let
-
   mkOptStr = value:
     mkOption {
       type = with types; uniq str;

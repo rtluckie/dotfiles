@@ -30,15 +30,15 @@
 
   outputs = inputs @ {
     self,
-    nixpkgs,
+    # cemacs,
     darwin,
-    home-manager,
     # devenv,
     # devshell,
-    # nur,
-    # flake-utils,
     # emacs-overlay,
-    # cemacs,
+    # flake-utils,
+    home-manager,
+    nixpkgs,
+    # nur,
     rust-overlay,
     ...
   }: let
@@ -59,7 +59,6 @@
       (import ./nix/overlays)
     ];
 
-    # idea borrowed from https://github.com/hardselius/dotfiles
     mkDarwinSystem = {modules}:
       makeOverridable darwin.lib.darwinSystem {
         inputs = inputs;

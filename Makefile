@@ -27,7 +27,6 @@ git/pull:
 nix/flake/update:
 	@nix flake update --refresh
 
-
 ## format
 format:
 	nix develop --command bash -c 'treefmt .'
