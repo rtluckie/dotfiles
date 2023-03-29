@@ -32,6 +32,7 @@ in {
         argocd
         krew
         kubectl
+        kubectx
         kubernetes-helm
         kustomize
         stern
