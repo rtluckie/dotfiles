@@ -41,5 +41,11 @@ in {
           fi
         '';
       }
+      {
+        my.hm.user.programs.zsh.shellAliases = {
+          vim = "nvim";
+          vi = "nvim";
+        };
+      }
     ]);
 }
