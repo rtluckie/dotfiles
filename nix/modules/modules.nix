@@ -75,6 +75,7 @@ with lib; let
     (loadModule ./tools/pulumi.nix {})
     (loadModule ./tools/qemu.nix {})
     (loadModule ./tools/redis.nix {})
+    (loadModule ./tools/redpanda.nix {})
     (loadModule ./tools/ripgrep.nix {})
     (loadModule ./tools/skhd.nix {})
     (loadModule ./tools/sre.nix {})
