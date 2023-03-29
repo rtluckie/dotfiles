@@ -44,6 +44,12 @@ nix/gc:
 	@nix-collect-garbage --delete-old
 	@nix-collect-garbage -d
 
+## nix/update
+nix/update:
+	@echo "Updating..."
+	@ nix-channel --update
+	@nix flake update 
+
 ## nix build
 nix/build/%:
 	@echo "Build"
