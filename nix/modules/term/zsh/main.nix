@@ -58,6 +58,17 @@ in {
         oh-my-zsh.enable = true;
       };
     }
+    {
+      my.hm.user.programs.zsh = with pkgs;{
+        programs = {
+          zsh = {
+            initExtra = ''
+              source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+            '';
+          };
+        };
+    };
+    }
     # {
     #   my.hm.user.programs.zsh.initExtra = ''
     #     zstyle ':autocomplete:*' fzf-completion yes

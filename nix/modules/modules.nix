@@ -14,6 +14,7 @@ with lib; let
     (loadModule ./gui/amethyst.nix {})
     (loadModule ./gui/brave-browser.nix {})
     (loadModule ./gui/discord.nix {})
+    (loadModule ./gui/fig.nix {})
     (loadModule ./gui/goland.nix {})
     (loadModule ./gui/google-drive.nix {})
     (loadModule ./gui/istat-menus.nix {})
