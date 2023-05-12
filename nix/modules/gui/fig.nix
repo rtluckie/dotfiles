@@ -12,7 +12,7 @@ in {
       enable =
         mkEnableOption "gui.fig"
         // {
-          default = true;
+          default = false;
         };
     };
   };
