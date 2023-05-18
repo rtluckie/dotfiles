@@ -109,6 +109,9 @@ in {
             up_to_date = "✓";
             format = "([$all_status$ahead_behind]($style))";
           };
+          python = {
+            disabled = true;
+          };
           kubernetes = {
             disabled = false;
             format = "⛵ [$context](dimmed yellow)(/[\($namespace\)](dimmed green))";

@@ -80,6 +80,7 @@ with lib; let
     (loadModule ./tools/ripgrep.nix {})
     (loadModule ./tools/skhd.nix {})
     (loadModule ./tools/sre.nix {})
+    (loadModule ./tools/steampipe.nix {})
     (loadModule ./tools/terraform.nix {})
     (loadModule ./tools/text.nix {})
     (loadModule ./tools/treefmt.nix {})
