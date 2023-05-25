@@ -38,6 +38,7 @@ in {
         gitAndTools.hub
         gitAndTools.lazygit
         gitAndTools.tig
+        gitAndTools.git-filter-repo
       ];
     }
     {

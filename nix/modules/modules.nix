@@ -58,6 +58,7 @@ with lib; let
     (loadModule ./tools/dev.nix {})
     (loadModule ./tools/dircolors.nix {})
     (loadModule ./tools/direnv.nix {})
+    (loadModule ./tools/docker.nix {})
     (loadModule ./tools/dyff.nix {})
     (loadModule ./tools/exa.nix {})
     (loadModule ./tools/fd.nix {})
