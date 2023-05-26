@@ -49,6 +49,7 @@ in {
       website = mkOptStr "https://lck.dev";
       nixManaged = mkOptStr "Nix managed - DO NOT EDIT";
       user = mkOption {type = options.users.users.type.functor.wrapped;};
+      hb = mkOption {type = options.darwin.homebrew.type.functor.wrapped;};
       dotfiles = rec {
         dir = mkOpt path ../../.;
         nixDir = mkOpt path "${config.my.dotfiles.dir}/nix";
@@ -67,20 +68,9 @@ in {
         dataHome = mkOpt' path "${home}/.local/share" "Absolute path to directory holding application data.";
         stateHome = mkOpt' path "${home}/.local/state" "Absolute path to directory holding application states.";
       };
-      fonts = mkOption {
+      fonts = mkOption rec {
         type = attrsOf (attrsOf (oneOf [str package int float]));
-        default = with pkgs; {
-          sans = {
-            name = "Fira Code";
-            package = fira-code;
-            size = 22;
-          };
-          serif = {
-            name = "Source Serif 4";
-            package = fira-code;
-            size = 22;
-          };
-        };
+        default = {};
       };
       pythonPackages = mkOption {
         type = listOf packages;

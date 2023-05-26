@@ -20,6 +20,9 @@ in {
   config = mkIf cfg.enable (mkMerge [
     {
       # home.packages = [ pkgs.zsh ];
+      my.hm.user.home.shellAliases = {
+        cat = "bat";
+      };
       my.hm.user.programs.bat = rec {
         enable = true;
         config.theme = "Dracula";

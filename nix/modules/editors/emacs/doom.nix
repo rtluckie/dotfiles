@@ -101,8 +101,14 @@ in {
             (setq  user-mail-address "${config.my.email}" )
             (setq user-username "${config.my.githubUsername}" )
             (setq user-github-username user-username )
-            (setq font  "${config.my.fonts.sans.name}" )
-            ;; (setq serif-font "${config.my.fonts.serif.name}" )
+
+            (setq
+              doom-font (font-spec :family "${config.my.fonts.mono.name}" :size ${toString config.my.fonts.mono.size})
+              doom-big-font (font-spec :family "${config.my.fonts.big.name}" :size ${toString config.my.fonts.big.size})
+              doom-serif-font (font-spec :family "${config.my.fonts.serif.name}" :size ${toString config.my.fonts.serif.size})
+              doom-unicode-font (font-spec :family "${config.my.fonts.unicode.name}" :size ${toString config.my.fonts.unicode.size})
+              doom-variable-pitch-font (font-spec :family "${config.my.fonts.variablePitch.name}" :size ${toString config.my.fonts.variablePitch.size})
+              )
             #+end_src
           ''
           (

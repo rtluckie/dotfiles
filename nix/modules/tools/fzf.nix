@@ -12,7 +12,7 @@ in {
       enable =
         mkEnableOption "tools.fzf"
         // {
-          default = true;
+          default = false;
         };
     };
   };

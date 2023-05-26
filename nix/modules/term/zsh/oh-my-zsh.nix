@@ -52,7 +52,7 @@
           # "colored-man-pages"
           # "colorize"
           "command-not-found"
-          # "common-aliases"
+          "common-aliases"
           # "compleat"
           # "composer"
           "copybuffer"
@@ -329,7 +329,7 @@
           # "zeus"
           # "zoxide" # in module
           # "zsh-interactive-cd"
-          # "zsh-navigation-tools"
+          "zsh-navigation-tools"
         ];
       };
     }

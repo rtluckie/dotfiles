@@ -21,17 +21,17 @@ in {
     {
       homebrew = {
         enable = true;
-        onActivation.autoUpdate = true;
+        onActivation.autoUpdate = false;
         onActivation.cleanup = "zap";
-        onActivation.upgrade = true;
-        global.autoUpdate = true;
+        onActivation.upgrade = false;
+        global.autoUpdate = false;
         global.brewfile = true;
         global.lockfiles = true;
         taps = [
-          "homebrew/core"
-          "homebrew/cask"
-          "homebrew/services"
           "homebrew/cask-versions"
+          "homebrew/cask"
+          "homebrew/core"
+          "homebrew/services"
         ];
       };
     }

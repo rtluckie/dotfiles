@@ -95,7 +95,7 @@ in {
               [selected_scheme] = scheme
             },
             color_scheme = selected_scheme,
-            font = wezterm.font("${config.my.fonts.sans.name}"),
+            font = wezterm.font("${config.my.fonts.mono.name}"),
             font_size = 22,
             tab_bar_at_bottom = true,
             tab_max_width = 96,
@@ -142,7 +142,7 @@ in {
             },
 
             window_frame = {
-              font = wezterm.font({family="${config.my.fonts.sans.name}", weight="Bold"}),
+              font = wezterm.font({family="${config.my.fonts.mono.name}", weight="Bold"}),
               font_size = 22,
             },
             window_decorations = "RESIZE",

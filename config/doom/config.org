@@ -1,22 +1,5 @@
 
 ** Display configuration
-*** Font
-
-I am still undecided on usage of variable pitch font. I cannot recall what issue it was causing for me, but it had to do with ligatures. It is probably fine.
-
-#+begin_src elisp
-
- (setq sans-font font )
- (setq font-size 24 )
- (setq big-font-size 24 )
- (setq
-   doom-font (font-spec :family font :size font-size)
-   doom-big-font (font-spec :family font :size big-font-size)
-   doom-serif-font (font-spec :family font :size font-size)
-   doom-unicode-font (font-spec :family sans-font :size font-size)
-   doom-variable-pitch-font (font-spec :family font :size font-size)
-)
-#+end_src
 
 *** Modeline
 
