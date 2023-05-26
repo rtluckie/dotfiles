@@ -33,7 +33,7 @@ in {
       ];
     }
     {
-      my.hb = {
+      homebrew = {
         brews = [];
         casks = [];
         taps = [];

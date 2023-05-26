@@ -135,7 +135,7 @@
           # "heroku"
           # "heroku-alias"
           "history"
-          "history-substring-search"
+          # "history-substring-search"
           # "hitchhiker"
           # "hitokoto"
           # "homestead"

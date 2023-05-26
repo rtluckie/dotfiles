@@ -27,7 +27,7 @@
       {
         my.fonts = rec {
           default = {
-            name = "VictorMono Nerd Font";
+            name = "FiraCode Nerd Font";
             size = 22;
           };
           big = {

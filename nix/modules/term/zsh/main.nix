@@ -34,7 +34,10 @@ in {
       programs.zsh.enable = true;
     }
     {
-      my.user.shell = pkgs.zsh;
+      my.user.shell =
+        if pkgs.stdenv.isDarwin
+        then [pkgs.zsh]
+        else pkgs.zsh;
     }
     {
       my.hm.user.programs.zsh = {
@@ -58,13 +61,13 @@ in {
         oh-my-zsh.enable = true;
       };
     }
-    {
-      my.hm.user.programs.zsh = with pkgs; {
-        initExtra = ''
-          source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-        '';
-      };
-    }
+    # {
+    #   my.hm.user.programs.zsh = with pkgs; {
+    #     initExtra = ''
+    #       source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+    #     '';
+    #   };
+    # }
     # {
     #   my.hm.user.programs.zsh.initExtra = ''
     #     zstyle ':autocomplete:*' fzf-completion yes

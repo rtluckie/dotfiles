@@ -12,7 +12,7 @@ in {
       enable =
         mkEnableOption "tools.fzf"
         // {
-          default = false;
+          default = true;
         };
     };
   };
@@ -48,5 +48,17 @@ in {
         "fzf"
       ];
     }
+    {
+      my.env.PATH = ["$HOMEBREW_PREFIX/bin" "$PATH"];
+    }
+    # {
+    #   my.hm.user.programs.zsh.initExtra = ''
+    #     if [ ! -n "$__FIX_IT" ]; then
+    #       export __FIX_IT=1
+    #       omz reload
+
+    #     fi
+    #   '';
+    # }
   ]);
 }

@@ -12,7 +12,7 @@ in {
       enable =
         mkEnableOption "tools.skim"
         // {
-          default = true;
+          default = false;
         };
     };
   };
@@ -40,21 +40,6 @@ in {
           "--tac"
           "--exact"
         ];
-      };
-    }
-    {
-      my.hm.user.home.shellAliases = {
-      };
-    }
-    {
-      my.hm.user.home.packages = with pkgs; [
-      ];
-    }
-    {
-      my.hb = {
-        brews = [];
-        casks = [];
-        taps = [];
       };
     }
   ]);

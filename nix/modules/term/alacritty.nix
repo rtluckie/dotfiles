@@ -41,7 +41,7 @@ in {
               family = config.my.fonts.mono.name;
               style = "Italic";
             };
-            size = config.my.fonts.mono.size;
+            size = (config.my.fonts.mono.size * 0.20) + config.my.fonts.mono.size;
           };
           cursor = {
             style = "Beam";
@@ -56,7 +56,7 @@ in {
               y = 20;
             };
             decorations = "none";
-            startup_mode = "SimpleFullscreen";
+            startup_mode = "Maximized";
             dynamic_title = false;
           };
         };

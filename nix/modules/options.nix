@@ -49,7 +49,6 @@ in {
       website = mkOptStr "https://lck.dev";
       nixManaged = mkOptStr "Nix managed - DO NOT EDIT";
       user = mkOption {type = options.users.users.type.functor.wrapped;};
-      hb = mkOption {type = options.darwin.homebrew.type.functor.wrapped;};
       dotfiles = rec {
         dir = mkOpt path ../../.;
         nixDir = mkOpt path "${config.my.dotfiles.dir}/nix";

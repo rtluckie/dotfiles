@@ -12,7 +12,7 @@ in {
       enable =
         mkEnableOption "tools.zellij"
         // {
-          default = true;
+          default = false;
         };
     };
   };

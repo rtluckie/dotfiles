@@ -5,12 +5,12 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.tools.tokei;
+  cfg = config.modules.tools.iterm2;
 in {
   options = {
-    modules.tools.tokei = {
+    modules.tools.iterm2 = {
       enable =
-        mkEnableOption "tools.tokei"
+        mkEnableOption "tools.iterm2"
         // {
           default = true;
         };
@@ -18,18 +18,11 @@ in {
   };
   config = mkIf cfg.enable (mkMerge [
     {
-      my.hm.user.home.shellAliases = {
-      };
-    }
-    {
-      my.hm.user.home.packages = with pkgs; [
-        tokei
-      ];
-    }
-    {
       homebrew = {
         brews = [];
-        casks = [];
+        casks = [
+          "iterm2"
+        ];
         taps = [];
       };
     }

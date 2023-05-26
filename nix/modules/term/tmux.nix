@@ -46,23 +46,23 @@ in {
     }
     {
       my.hm.user.programs.tmux.plugins = with pkgs; [
-        # tmuxPlugins.resurrect
-        tmuxPlugins.gruvbox
         tmuxPlugins.pain-control
         tmuxPlugins.copycat
         # tmuxPlugins.continuum
-        # {
-        #   plugin = tmuxPlugins.dracula;
-        #   extraConfig = ''
-        #     set -g @resurrect-strategy-nvim 'session'
-        #     set -g @dracula-show-location false
-        #     set -g @dracula-plugins "battery network"
-        #   '';
-        # }
+        # tmuxPlugins.resurrect
+        {
+          plugin = tmuxPlugins.dracula;
+          extraConfig = ''
+            set -g @resurrect-strategy-nvim 'session'
+            set -g @dracula-show-location false
+            set -g @dracula-plugins "battery network"
+          '';
+        }
+        # tmuxPlugins.gruvbox
         {
           plugin = tmuxPlugins.tmux-thumbs;
           extraConfig = ''
-            # set -g @thumbs-command 'echo -n {} | pbcopy'
+            set -g @thumbs-command 'echo -n {} | pbcopy'
             set -g @thumbs-unique enabled
           '';
         }
