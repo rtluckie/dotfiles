@@ -21,9 +21,9 @@ in {
     {
       homebrew = {
         enable = true;
-        onActivation.autoUpdate = false;
+        onActivation.autoUpdate = true;
         onActivation.cleanup = "zap";
-        onActivation.upgrade = false;
+        onActivation.upgrade = true;
         global.autoUpdate = false;
         global.brewfile = true;
         global.lockfiles = true;
