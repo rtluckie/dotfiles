@@ -5,12 +5,12 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.gui.jetbrains-gateway;
+  cfg = config.modules.gui.idea;
 in {
   options = {
-    modules.gui.jetbrains-gateway = {
+    modules.gui.idea = {
       enable =
-        mkEnableOption "gui.jetbrains-gateway"
+        mkEnableOption "gui.idea"
         // {
           default = true;
         };
@@ -20,7 +20,7 @@ in {
   config = mkIf cfg.enable (mkMerge [
     {
       my.hm.user.home.packages = with pkgs; [
-        jetbrains.gateway
+        jetbrains.idea-ultimate
       ];
     }
   ]);

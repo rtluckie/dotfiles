@@ -24,7 +24,7 @@ in {
         onActivation.autoUpdate = true;
         onActivation.cleanup = "zap";
         onActivation.upgrade = true;
-        global.autoUpdate = false;
+        global.autoUpdate = true;
         global.brewfile = true;
         global.lockfiles = true;
         taps = [

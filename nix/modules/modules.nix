@@ -18,6 +18,7 @@ with lib; let
     (loadModule ./gui/goland.nix {})
     (loadModule ./gui/google-drive.nix {})
     (loadModule ./gui/idea.nix {})
+    (loadModule ./gui/jetbrains-gateway.nix {})
     (loadModule ./gui/istat-menus.nix {})
     (loadModule ./gui/keycastr.nix {})
     (loadModule ./gui/lens.nix {})
