@@ -5,12 +5,12 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.tools.compression;
+  cfg = config.modules.applications.misc._1password;
 in {
   options = {
-    modules.tools.compression = {
+    modules.applications.misc._1password = {
       enable =
-        mkEnableOption "tools.compression"
+        mkEnableOption "applications.misc.1password"
         // {
           default = true;
         };
@@ -19,19 +19,14 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      environment.systemPackages = with pkgs; [
-        gnutar
-        p7zip
-        unrar
-        unzip
-        xz
-        zip
-        zstd
+      homebrew.casks = [
+        "1password"
+        "1password-cli"
       ];
     }
     {
       my.hm.user.programs.zsh.oh-my-zsh.plugins = [
-        "extract"
+        "1password"
       ];
     }
   ]);

@@ -5,12 +5,12 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.tools.compression;
+  cfg = config.modules.servers.redpanda;
 in {
   options = {
-    modules.tools.compression = {
+    modules.servers.redpanda = {
       enable =
-        mkEnableOption "tools.compression"
+        mkEnableOption "servers.redpanda"
         // {
           default = true;
         };
@@ -19,19 +19,15 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      environment.systemPackages = with pkgs; [
-        gnutar
-        p7zip
-        unrar
-        unzip
-        xz
-        zip
-        zstd
+      homebrew.taps = [
+        "redpanda-data/tap"
+      ];
+      homebrew.brews = [
+        "redpanda-data/tap/redpanda"
       ];
     }
     {
       my.hm.user.programs.zsh.oh-my-zsh.plugins = [
-        "extract"
       ];
     }
   ]);

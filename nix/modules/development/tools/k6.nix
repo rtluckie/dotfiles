@@ -5,12 +5,12 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.tools.compression;
+  cfg = config.modules.development.tools.k6;
 in {
   options = {
-    modules.tools.compression = {
+    modules.development.tools.k6 = {
       enable =
-        mkEnableOption "tools.compression"
+        mkEnableOption "development.tools.k6"
         // {
           default = true;
         };
@@ -19,19 +19,12 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      environment.systemPackages = with pkgs; [
-        gnutar
-        p7zip
-        unrar
-        unzip
-        xz
-        zip
-        zstd
+      my.hm.user.home.packages = with pkgs; [
+        k6
       ];
     }
     {
       my.hm.user.programs.zsh.oh-my-zsh.plugins = [
-        "extract"
       ];
     }
   ]);

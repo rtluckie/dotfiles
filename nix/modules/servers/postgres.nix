@@ -5,12 +5,12 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.tools.compression;
+  cfg = config.modules.servers.postgres;
 in {
   options = {
-    modules.tools.compression = {
+    modules.servers.postgres = {
       enable =
-        mkEnableOption "tools.compression"
+        mkEnableOption "servers.postgres"
         // {
           default = true;
         };
@@ -20,18 +20,16 @@ in {
   config = mkIf cfg.enable (mkMerge [
     {
       environment.systemPackages = with pkgs; [
-        gnutar
-        p7zip
-        unrar
-        unzip
-        xz
-        zip
-        zstd
+      ];
+    }
+    {
+      my.hm.user.home.packages = with pkgs; [
+        postgresql
       ];
     }
     {
       my.hm.user.programs.zsh.oh-my-zsh.plugins = [
-        "extract"
+        "postgres"
       ];
     }
   ]);

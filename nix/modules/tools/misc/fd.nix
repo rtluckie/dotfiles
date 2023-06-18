@@ -5,33 +5,26 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.tools.compression;
+  cfg = config.modules.tools.misc.fd;
 in {
   options = {
-    modules.tools.compression = {
+    modules.tools.misc.fd = {
       enable =
-        mkEnableOption "tools.compression"
+        mkEnableOption "tools.misc.fd"
         // {
           default = true;
         };
     };
   };
-
   config = mkIf cfg.enable (mkMerge [
     {
-      environment.systemPackages = with pkgs; [
-        gnutar
-        p7zip
-        unrar
-        unzip
-        xz
-        zip
-        zstd
+      my.hm.user.home.packages = with pkgs; [
+        fd
       ];
     }
     {
       my.hm.user.programs.zsh.oh-my-zsh.plugins = [
-        "extract"
+        "fd"
       ];
     }
   ]);

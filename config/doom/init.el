@@ -16,11 +16,11 @@
 
 (doom!
     :completion
-    (company)
+    (company +childframe)
     ;;helm
     ;;ido
-    ;;ivy
-    (vertico +icons)
+    (ivy +childframe +fuzzy +icons +prescient)
+    (vertico +icons +childframe)
 
     :ui
     deft
@@ -43,7 +43,7 @@
     unicode
     (vc-gutter +pretty)
     vi-tilde-fringe
-    window-select
+    (window-select +switch-window +numbers)
     workspaces
     zen
 
@@ -105,7 +105,7 @@
 
     :os
     (:if IS-MAC macos)
-    tty
+    (tty +osc)
 
     :lang
     ;;agda
