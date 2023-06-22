@@ -59,6 +59,7 @@ with lib; let
     (loadModule ./development/compilers/rust.nix {})
     (loadModule ./development/libraries.nix {})
     (loadModule ./development/tools/common.nix {})
+    (loadModule ./development/tools/confluent-cli.nix {})
     (loadModule ./development/tools/dyff.nix {})
     (loadModule ./development/tools/git.nix {})
     (loadModule ./development/tools/jq.nix {})
