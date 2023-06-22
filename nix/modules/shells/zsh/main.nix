@@ -9,14 +9,30 @@ with lib; let
 in {
   options = {
     modules.shells.zsh = {
-      enable =
-        mkEnableOption "shells.zsh"
-        // {
-          default = true;
-        };
+      enable = mkEnableOption "shells.zsh" // {default = true;};
     };
   };
   config = mkIf cfg.enable (mkMerge [
+    {
+      environment = {
+        # must already begin with pre-existing PATH. Also, can't use binDir here,
+        # because it contains a nix store path.
+        extraInit =
+          concatStringsSep "\n"
+          (mapAttrsToList (n: v: ''export ${n}="${v}"'') config.my.env);
+        variables = {
+          DOTFILES = "${config.my.dotfiles.dir}";
+          DOTFILES_BIN = "${config.my.dotfiles.binDir}";
+        };
+        # sessionVariables = {XDG_BIN_HOME = "$HOME/.local/bin";};
+        # localBinInPath = true;
+        # homeBinInPath = true;
+        shellAliases = {};
+        interactiveShellInit = "";
+        loginShellInit = "";
+        shellInit = "";
+      };
+    }
     {
       my.hm.user = {
         home = {
@@ -29,9 +45,26 @@ in {
       };
     }
     {
-      environment.shells = [pkgs.zsh];
+      environment = {
+        shells = [pkgs.zsh];
+        systemPackages = with pkgs; [
+          file
+          git
+          rsync
+          vim
+          zsh
+        ];
+        pathsToLink = ["/share/zsh"];
+      };
+      # localBinInPath = true;
+      # homeBinInPath = true;
+      # shellAliases = {};
+      # interactiveShellInit = "";
+      # loginShellInit = "";
+      # shellInit = "";
+    }
+    {
       programs.zsh.enable = true;
-      environment.systemPackages = with pkgs; [file git rsync vim zsh];
     }
     {
       my.user.shell = pkgs.zsh;
@@ -61,6 +94,16 @@ in {
           size = 500000;
         };
         oh-my-zsh.enable = true;
+        initExtra = "";
+        initExtraBeforeCompInit = "";
+        initExtraFirst = "";
+        localVariables = {};
+        loginExtra = "";
+        logoutExtra = "";
+        profileExtra = "";
+        sessionVariables = {};
+        shellAliases = {};
+        shellGlobalAliases = {};
       };
     }
     # {

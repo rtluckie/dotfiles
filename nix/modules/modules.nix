@@ -69,6 +69,7 @@ with lib; let
     (loadModule ./development/tools/treefmt.nix {})
     (loadModule ./development/tools/yq.nix {})
     (loadModule ./helpers/apps.nix {})
+    (loadModule ./helpers/bins.nix {})
     # (loadModule ./helpers/fonts.nix {})
     (loadModule ./helpers/media.nix {})
     (loadModule ./options.nix {})

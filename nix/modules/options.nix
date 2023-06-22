@@ -77,64 +77,62 @@ in {
       };
       env = mkOption {
         type = attrsOf (oneOf [str path (listOf (either str path))]);
-        apply =
-          mapAttrs
-          (n: v:
-            if isList v
-            then concatMapStringsSep ":" (x: toString x) v
-            else (toString v));
+        apply = mapAttrs (n: v:
+          if isList v
+          then concatMapStringsSep ":" (x: toString x) v
+          else (toString v));
         default = {};
       };
     };
   };
-  config = {
+  config = rec {
     users.users."${config.my.username}" = mkAliasDefinitions options.my.user;
     home-manager.users."${config.my.username}" = mkAliasDefinitions options.my.hm.user;
-    my.user = {
-      inherit home;
-      description = "Primary user account";
-    };
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
-    my.hm.user = {
-      xdg = {
-        enable = true;
-        cacheHome = mkAliasDefinitions options.my.hm.cacheHome;
-        configFile = mkAliasDefinitions options.my.hm.configFile;
-        configHome = mkAliasDefinitions options.my.hm.configHome;
-        dataFile = mkAliasDefinitions options.my.hm.dataFile;
-        dataHome = mkAliasDefinitions options.my.hm.dataHome;
-        stateHome = mkAliasDefinitions options.my.hm.stateHome;
+    my = {
+      user = {
+        inherit home;
+        description = "Primary user account";
       };
-      home = {
-        # # Necessary for home-manager to work with flakes, otherwise it will
-        # # look for a nixpkgs channel.
-        stateVersion =
-          if pkgs.stdenv.isDarwin
-          then "23.05"
-          else config.system.stateVersion;
-        inherit (config.my) username;
-        file = mkAliasDefinitions options.my.hm.file;
-
-        sessionPath = [
+      env = {
+        PATH = [
+          "$DOTFILES_BIN"
+          "$XDG_BIN_HOME"
           "$HOME/.nix-profile/bin"
           "/etc/profiles/per-user/${config.my.username}/bin"
           "/opt/homebrew/bin"
           "/opt/homebrew/sbin"
+          "$PATH"
         ];
       };
+      hm = {
+        user = {
+          xdg = {
+            enable = true;
+            cacheHome = mkAliasDefinitions options.my.hm.cacheHome;
+            configFile = mkAliasDefinitions options.my.hm.configFile;
+            configHome = mkAliasDefinitions options.my.hm.configHome;
+            dataFile = mkAliasDefinitions options.my.hm.dataFile;
+            dataHome = mkAliasDefinitions options.my.hm.dataHome;
+            stateHome = mkAliasDefinitions options.my.hm.stateHome;
+          };
+          home = {
+            # # Necessary for home-manager to work with flakes, otherwise it will
+            # # look for a nixpkgs channel.
+            stateVersion =
+              if pkgs.stdenv.isDarwin
+              then "23.05"
+              else config.system.stateVersion;
+            inherit (config.my) username;
+            file = mkAliasDefinitions options.my.hm.file;
 
-      programs = {
-        home-manager.enable = true;
+            sessionPath = [];
+          };
+
+          programs = {home-manager.enable = true;};
+        };
       };
     };
-
-    # must already begin with pre-existing PATH. Also, can't use binDir here,
-    # because it contains a nix store path.
-    # my.env.PATH = ["$PATH" ];
-
-    # environment.extraInit =
-    #   concatStringsSep "\n"
-    #   (mapAttrsToList (n: v: "export ${n}=\"${v}\"") config.my.env);
   };
 }
