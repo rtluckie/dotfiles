@@ -21,9 +21,9 @@ in {
       my.hm.user = {
         home = {
           sessionVariables = {
-            EDITOR = "emacsclient --alternate-editor=\"\" --create-frame";
-            VISUAL = "$EDITOR";
-            PAGER = "less";
+            # EDITOR = "emacsclient --alternate-editor=\"\" --create-frame";
+            # VISUAL = "$EDITOR";
+            # PAGER = "less";
           };
         };
       };

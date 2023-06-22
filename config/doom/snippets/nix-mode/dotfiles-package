@@ -1,0 +1,41 @@
+
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: dotfiles package
+# key: pkgg
+# uuid: pkgg
+# --
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.modules.$1.$2;
+in {
+  options = {
+    modules.servers.redis = {
+      enable =
+        mkEnableOption "$1.$2"
+        // {
+          default = $3;
+        };
+    };
+  };
+
+  config = mkIf cfg.enable (mkMerge [
+    {
+      my.hm.user.home.packages = with pkgs; [
+        $2
+      ];
+    }
+    {
+      environment.systemPackages = with pkgs; [
+      ];
+    }
+    {
+      my.hm.user.programs.zsh.oh-my-zsh.plugins = [
+      ];
+    }
+  ]);
+}

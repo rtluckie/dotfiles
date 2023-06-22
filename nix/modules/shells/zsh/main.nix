@@ -21,7 +21,7 @@ in {
       my.hm.user = {
         home = {
           sessionVariables = {
-            EDITOR = "emacsclient --alternate-editor=\"\" --create-frame";
+            EDITOR = "eframe";
             VISUAL = "$EDITOR";
             PAGER = "less";
           };
@@ -30,14 +30,16 @@ in {
     }
     {
       environment.shells = [pkgs.zsh];
-      environment.systemPackages = [pkgs.zsh];
       programs.zsh.enable = true;
+      environment.systemPackages = with pkgs; [file git rsync vim zsh];
     }
     {
-      my.user.shell =
-        if pkgs.stdenv.isDarwin
-        then [pkgs.zsh]
-        else pkgs.zsh;
+      my.user.shell = pkgs.zsh;
+
+      # my.user.shell =
+      #   if pkgs.stdenv.isDarwin
+      #   then [pkgs.zsh]
+      #   else pkgs.zsh;
     }
     {
       my.hm.user.programs.zsh = {
@@ -46,7 +48,7 @@ in {
         enableAutosuggestions = true;
         enableSyntaxHighlighting = true;
         autocd = true;
-        defaultKeymap = "emacs";
+        defaultKeymap = "viins";
         dotDir = ".config/zsh";
         history = {
           ignoreDups = true;

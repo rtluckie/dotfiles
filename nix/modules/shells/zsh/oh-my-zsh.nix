@@ -307,7 +307,7 @@
           # "vagrant"
           # "vagrant-prompt"
           # "vault"
-          # "vi-mode"
+          "vi-mode"
           # "vim-interaction"
           # "virtualenv"
           # "virtualenvwrapper"

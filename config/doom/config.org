@@ -32,7 +32,7 @@ Now that Prot has release [[https://github.com/protesilaos/ef-themes][ef-themes]
 #+begin_src elisp
 (require 'ef-themes)
 (mapc #'disable-theme custom-enabled-themes)
-(load-theme 'doom-dracula :no-confirm)
+(load-theme 'doom-monokai-pro :no-confirm)
 #+end_src
 
 
@@ -61,9 +61,13 @@ The line I am on is always in the modeline, so generally I don't need to see the
 Toggle line wrapping.
 
 #+begin_src elisp
-(map! :leader
-      (:prefix-map ("t" . "toggle")
-        :desc "Toggle truncate lines"            "t" #'toggle-truncate-lines))
+(map!
+ :leader
+ (
+  :prefix-map ("t" . "toggle")
+  :desc "Toggle truncate lines"         "t" #'toggle-truncate-lines
+  )
+ )
 #+end_src
 
 Who doesn't want Bruce Lee to greet them at the beginning of a work session. He's there to remind you:
@@ -204,7 +208,10 @@ Load ox exporters (gfm, jira, and pandoc) as soon as org is loaded. No clue why 
 
 #+begin_src elisp
 (setq projectile-project-search-path
-      '(("~/projects/github.com/" . 2))
+      '(
+        ("~/projects/" . 3)
+        ("~/Desktop/" . 1)
+        )
       projectile-sort-order 'recentf)
 #+end_src
 

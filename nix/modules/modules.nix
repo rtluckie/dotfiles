@@ -90,6 +90,7 @@ with lib; let
     (loadModule ./tools/misc/plantuml.nix {})
     (loadModule ./tools/misc/skim.nix {})
     (loadModule ./tools/misc/starship.nix {})
+    (loadModule ./tools/admin/auth0.nix {})
     (loadModule ./tools/misc/steampipe.nix {})
     (loadModule ./tools/misc/tmux.nix {})
     (loadModule ./tools/misc/xclip.nix {})

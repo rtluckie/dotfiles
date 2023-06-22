@@ -115,6 +115,13 @@ in {
           else config.system.stateVersion;
         inherit (config.my) username;
         file = mkAliasDefinitions options.my.hm.file;
+
+        sessionPath = [
+          "$HOME/.nix-profile/bin"
+          "/etc/profiles/per-user/${config.my.username}/bin"
+          "/opt/homebrew/bin"
+          "/opt/homebrew/sbin"
+        ];
       };
 
       programs = {
@@ -124,10 +131,10 @@ in {
 
     # must already begin with pre-existing PATH. Also, can't use binDir here,
     # because it contains a nix store path.
-    my.env.PATH = ["$HOME/.nix-profile/bin" "$PATH"];
+    # my.env.PATH = ["$PATH" ];
 
-    environment.extraInit =
-      concatStringsSep "\n"
-      (mapAttrsToList (n: v: "export ${n}=\"${v}\"") config.my.env);
+    # environment.extraInit =
+    #   concatStringsSep "\n"
+    #   (mapAttrsToList (n: v: "export ${n}=\"${v}\"") config.my.env);
   };
 }
