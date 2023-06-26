@@ -13,14 +13,14 @@ in {
       enable =
         mkEnableOption "helpers.bins"
         // {
-          default = true;
+          default = false;
         };
     };
   };
   config = mkIf cfg.enable (mkMerge [
     {
       my.hm.user.home.activation.userBins = inputs.home-manager.lib.hm.dag.entryAfter ["writeBoundary"] ''
-        cp -pr ${config.my.dotfiles.binDir} ${config.my.homeDirectory}
+        cp -pr ${config.my.dotfiles.binDir}/** ${config.my.homeDirectory}/.local/bin
       '';
     }
   ]);

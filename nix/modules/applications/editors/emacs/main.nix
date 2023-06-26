@@ -152,7 +152,8 @@ in {
               "with-imagemagick"
               "with-mailutils"
             ];
-            restart_service = "changed";
+            restart_service = false;
+            start_service = false;
           }
         ];
       }

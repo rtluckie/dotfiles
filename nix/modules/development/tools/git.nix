@@ -34,11 +34,13 @@ in {
         exiftool
         gitAndTools.delta
         gitAndTools.gh
+        gitAndTools.git-filter-repo
+        gitAndTools.git-lfs
         gitAndTools.gitui
         gitAndTools.hub
         gitAndTools.lazygit
         gitAndTools.tig
-        gitAndTools.git-filter-repo
+        gitAndTools.bfg-repo-cleaner
       ];
     }
     {

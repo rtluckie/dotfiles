@@ -95,17 +95,6 @@ in {
         inherit home;
         description = "Primary user account";
       };
-      env = {
-        PATH = [
-          "$DOTFILES_BIN"
-          "$XDG_BIN_HOME"
-          "$HOME/.nix-profile/bin"
-          "/etc/profiles/per-user/${config.my.username}/bin"
-          "/opt/homebrew/bin"
-          "/opt/homebrew/sbin"
-          "$PATH"
-        ];
-      };
       hm = {
         user = {
           xdg = {
@@ -126,10 +115,16 @@ in {
               else config.system.stateVersion;
             inherit (config.my) username;
             file = mkAliasDefinitions options.my.hm.file;
-
-            sessionPath = [];
+            sessionVariables = {
+              DOTFILES_BIN = "${config.my.dotfiles.dir}/bin";
+            };
+            sessionPath = [
+              "$DOTFILES_BIN"
+              "$HOME/.nix-profile/bin"
+              "$HOME/.local/bin"
+              "/etc/profiles/per-user/${config.my.username}/bin"
+            ];
           };
-
           programs = {home-manager.enable = true;};
         };
       };

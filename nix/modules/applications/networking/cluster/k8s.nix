@@ -24,7 +24,7 @@ in {
           sessionPath = ["$HOME/.config/krew/bin"];
           sessionVariables = {
             KREW_ROOT = "$HOME/.config/krew";
-            KUBECONFIG = "$HOME/.config/k8s/config.yaml";
+            KUBECONFIG = "$HOME/.config/k8s/configs/main.yaml";
           };
         };
       };
