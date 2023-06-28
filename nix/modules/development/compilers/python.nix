@@ -70,14 +70,6 @@ in {
           fi
         '';
 
-      my.hm.user.home = {
-        sessionPath = [
-          "$PYENV_ROOT/bin"
-        ];
-        sessionVariables = {
-          PYENV_ROOT = "$HOME/.local/share/pyenv";
-        };
-      };
       my.hm.user.programs.zsh.profileExtra = ''
         export PYENV_ROOT="$HOME/.local/share/pyenv"
         export PATH="$PYENV_ROOT/bin:$PATH"

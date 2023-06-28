@@ -9,72 +9,23 @@ with lib; let
 in {
   options = {
     modules.shells.zsh = {
-      enable = mkEnableOption "shells.zsh" // {default = true;};
+      enable =
+        mkEnableOption "shells.zsh"
+        // {
+          default = true;
+        };
     };
   };
   config = mkIf cfg.enable (mkMerge [
-    {
-      environment = {
-        # must already begin with pre-existing PATH. Also, can't use binDir here,
-        # because it contains a nix store path.
-        extraInit =
-          concatStringsSep "\n"
-          (mapAttrsToList (n: v: ''export ${n}="${v}"'') config.my.env);
-        variables = {
-          DOTFILES = "${config.my.dotfiles.dir}";
-          DOTFILES_BIN = "${config.my.dotfiles.binDir}";
-        };
-        # sessionVariables = {XDG_BIN_HOME = "$HOME/.local/bin";};
-        # localBinInPath = true;
-        # homeBinInPath = true;
-        shellAliases = {};
-        interactiveShellInit = "";
-        loginShellInit = "";
-        shellInit = "";
-      };
-    }
-    {
-      my.hm.user = {
-        home = {
-          sessionVariables = {
-            EDITOR = "emacs";
-            VISUAL = "$EDITOR";
-            PAGER = "less";
-          };
-        };
-      };
-    }
-    {
-      environment = {
-        shells = [pkgs.zsh];
-        systemPackages = with pkgs; [
-          file
-          git
-          rsync
-          vim
-          zsh
-        ];
-        pathsToLink = ["/share/zsh"];
-      };
-      # localBinInPath = true;
-      # homeBinInPath = true;
-      # shellAliases = {};
-      # interactiveShellInit = "";
-      # loginShellInit = "";
-      # shellInit = "";
-    }
+    # {
+
+    #   my.user.shell =
+    #     if pkgs.stdenv.isDarwin
+    #     then [pkgs.zsh]
+    #     else pkgs.zsh;
+    # }
     {
       programs.zsh.enable = true;
-    }
-    {
-      my.user.shell = pkgs.zsh;
-
-      # my.user.shell =
-      #   if pkgs.stdenv.isDarwin
-      #   then [pkgs.zsh]
-      #   else pkgs.zsh;
-    }
-    {
       my.hm.user.programs.zsh = {
         enable = true;
         enableCompletion = true;

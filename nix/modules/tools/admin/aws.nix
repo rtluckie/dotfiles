@@ -27,15 +27,15 @@ in {
       my.hm.user = {
         home = {
           sessionVariables = {
-            AWS_CONFIG_FILE = "${config.my.hm.confiDir}/aws/config";
-            AWS_SHARED_CREDENTIALS_FILE = "${config.my.hm.configDir}/aws/credentials";
+            AWS_CONFIG_FILE = "${config.my.hm.configHome}/aws/config";
+            AWS_SHARED_CREDENTIALS_FILE = "${config.my.hm.configHome}/aws/credentials";
           };
         };
       };
     }
     {
       my.hm.user.programs.zsh.oh-my-zsh.plugins = [
-        aws
+        "aws"
       ];
     }
   ]);

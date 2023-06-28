@@ -20,8 +20,6 @@ in {
     {
       my.hm.user.programs.skim = {
         enable = true;
-        enableBashIntegration = true;
-        enableZshIntegration = true;
         changeDirWidgetCommand = "fd --type d";
         changeDirWidgetOptions = [
           "--preview 'tree -C {} | head -200'"
@@ -40,6 +38,13 @@ in {
           "--tac"
           "--exact"
         ];
+      };
+    }
+    {
+      my.hm.user.programs.skim = {
+        enableBashIntegration = true;
+        enableFishIntegration = true;
+        enableZshIntegration = true;
       };
     }
   ]);

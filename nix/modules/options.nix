@@ -35,7 +35,7 @@ with lib; let
     then "/Users/${config.my.username}"
     else "/home/${config.my.username}";
 in {
-  options = with types; {
+  options = with types; rec {
     my = {
       homeDirectory = mkOptStr "${home}";
       name = mkOptStr "Ryan Luckie";
@@ -44,6 +44,7 @@ in {
       # gpgKey = mkOptStr "BF2ADAA2A98F45E7";
       gpgKey = mkOptStr "rtluckie@gmail.com";
       githubUsername = mkOptStr "rtluckie";
+      # shellPackage = mkOpt' package pkgs.zsh;
       timeZone = mkOptStr "America/Chicago";
       hostname = mkOptStr "somehostname";
       website = mkOptStr "https://lck.dev";
@@ -85,49 +86,48 @@ in {
       };
     };
   };
-  config = rec {
-    users.users."${config.my.username}" = mkAliasDefinitions options.my.user;
-    home-manager.users."${config.my.username}" = mkAliasDefinitions options.my.hm.user;
-    home-manager.useGlobalPkgs = true;
-    home-manager.useUserPackages = true;
-    my = {
-      user = {
-        inherit home;
-        description = "Primary user account";
-      };
-      hm = {
-        user = {
-          xdg = {
-            enable = true;
-            cacheHome = mkAliasDefinitions options.my.hm.cacheHome;
-            configFile = mkAliasDefinitions options.my.hm.configFile;
-            configHome = mkAliasDefinitions options.my.hm.configHome;
-            dataFile = mkAliasDefinitions options.my.hm.dataFile;
-            dataHome = mkAliasDefinitions options.my.hm.dataHome;
-            stateHome = mkAliasDefinitions options.my.hm.stateHome;
+
+  config = with lib; let
+    cmn = import ./common.nix {inherit config lib pkgs;};
+  in (
+    mkMerge [
+      {
+        inherit (cmn);
+        users.users."${config.my.username}" = mkAliasDefinitions options.my.user;
+        home-manager.users."${config.my.username}" = mkAliasDefinitions options.my.hm.user;
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+        my = {
+          user = {
+            inherit home;
+            shell = pkgs.zsh;
           };
-          home = {
-            # # Necessary for home-manager to work with flakes, otherwise it will
-            # # look for a nixpkgs channel.
-            stateVersion =
-              if pkgs.stdenv.isDarwin
-              then "23.05"
-              else config.system.stateVersion;
-            inherit (config.my) username;
-            file = mkAliasDefinitions options.my.hm.file;
-            sessionVariables = {
-              DOTFILES_BIN = "${config.my.dotfiles.dir}/bin";
+          hm = {
+            user = {
+              xdg = {
+                enable = true;
+                cacheHome = mkAliasDefinitions options.my.hm.cacheHome;
+                configFile = mkAliasDefinitions options.my.hm.configFile;
+                configHome = mkAliasDefinitions options.my.hm.configHome;
+                dataFile = mkAliasDefinitions options.my.hm.dataFile;
+                dataHome = mkAliasDefinitions options.my.hm.dataHome;
+                stateHome = mkAliasDefinitions options.my.hm.stateHome;
+              };
+              home = {
+                # # Necessary for home-manager to work with flakes, otherwise it will
+                # # look for a nixpkgs channel.
+                stateVersion =
+                  if pkgs.stdenv.isDarwin
+                  then "23.05"
+                  else config.system.stateVersion;
+                inherit (config.my) username;
+                file = mkAliasDefinitions options.my.hm.file;
+              };
+              programs = {home-manager.enable = true;};
             };
-            sessionPath = [
-              "$DOTFILES_BIN"
-              "$HOME/.nix-profile/bin"
-              "$HOME/.local/bin"
-              "/etc/profiles/per-user/${config.my.username}/bin"
-            ];
           };
-          programs = {home-manager.enable = true;};
         };
-      };
-    };
-  };
+      }
+    ]
+  );
 }

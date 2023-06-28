@@ -20,7 +20,6 @@ in {
     {
       my.hm.user.programs.zoxide = {
         enable = true;
-        enableZshIntegration = true;
       };
     }
     {
@@ -47,6 +46,13 @@ in {
     {
       my.hm.user.home.shellAliases = {
         cd = "z";
+      };
+    }
+    {
+      my.hm.user.programs.zoxide = {
+        enableBashIntegration = true;
+        enableFishIntegration = true;
+        enableZshIntegration = true;
       };
     }
   ]);

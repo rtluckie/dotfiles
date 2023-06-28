@@ -20,9 +20,14 @@ in {
     {
       my.hm.user.programs.zellij = {
         enable = true;
-        enableBashIntegration = true;
-        enableZshIntegration = true;
         settings = {};
+      };
+    }
+    {
+      my.hm.user.programs.zellij = {
+        enableBashIntegration = true;
+        enableFishIntegration = true;
+        enableZshIntegration = true;
       };
     }
   ]);

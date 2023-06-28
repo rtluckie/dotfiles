@@ -22,7 +22,6 @@ in {
       # home.packages = [ pkgs.zsh ];
       my.hm.user.programs.starship = rec {
         enable = true;
-        enableZshIntegration = true;
         settings = {
           add_newline = false;
           format = lib.concatStrings [
@@ -31,6 +30,7 @@ in {
             "($kubernetes | )"
             "(($aws)(|$gcp) | )"
             "($git_branch( | $git_commit)( | $git_state)( | $git_status) | )"
+            "($shell | )"
             "$time( | $cmd_duration )(| $status  )"
             "$line_break"
             "$character"
@@ -126,6 +126,9 @@ in {
               ".k8s"
             ];
           };
+          shell = {
+            disabled = false;
+          };
           time = {
             disabled = false;
             format = "[$time]($style)";
@@ -133,6 +136,13 @@ in {
             style = "dimmed yellow";
           };
         };
+      };
+    }
+    {
+      my.hm.user.programs.starship = {
+        enableBashIntegration = true;
+        enableFishIntegration = true;
+        enableZshIntegration = true;
       };
     }
   ]);

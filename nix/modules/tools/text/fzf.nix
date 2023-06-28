@@ -48,6 +48,13 @@ in {
         "fzf"
       ];
     }
+    {
+      my.hm.user.programs.fzf = {
+        enableBashIntegration = true;
+        enableFishIntegration = true;
+        enableZshIntegration = true;
+      };
+    }
     # {
     #   my.hm.user.programs.zsh.initExtra = ''
     #     if [ ! -n "$__FIX_IT" ]; then

@@ -20,9 +20,14 @@ in {
     {
       my.hm.user.programs.navi = {
         enable = true;
-        enableBashIntegration = true;
-        enableZshIntegration = true;
         settings = {};
+      };
+    }
+    {
+      my.hm.user.programs.navi = {
+        enableBashIntegration = true;
+        enableFishIntegration = true;
+        enableZshIntegration = true;
       };
     }
   ]);

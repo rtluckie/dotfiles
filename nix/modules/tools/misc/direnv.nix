@@ -19,10 +19,12 @@ in {
   config = mkIf cfg.enable (mkMerge [
     {
       # home.packages = [ pkgs.direnv ];
-      my.hm.user.programs.direnv = rec {
+      my.hm.user.programs.direnv = {
         enable = true;
-        enableZshIntegration = false;
         nix-direnv = {enable = true;};
+        # enableBashIntegration = true;
+        # enableFishIntegration = true;
+        # enableZshIntegration = true;
       };
     }
     {

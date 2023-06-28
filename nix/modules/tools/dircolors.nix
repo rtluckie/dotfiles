@@ -12,7 +12,7 @@ in {
       enable =
         mkEnableOption "tools.dircolors"
         // {
-          default = true;
+          default = false;
         };
     };
   };
@@ -86,6 +86,13 @@ in {
           ".nix" = "38;5;155";
           ".dhall" = "38;5;178";
         };
+      };
+    }
+    {
+      my.hm.user.programs.dircolors = {
+        enableBashIntegration = true;
+        enableFishIntegration = true;
+        enableZshIntegration = true;
       };
     }
   ]);
