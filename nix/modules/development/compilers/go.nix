@@ -70,7 +70,6 @@ in {
         packages = goPackages;
       };
     }
-    {my.env.PATH = ["$HOME/.local/bin/go" "$PATH"];}
     {
       my.hm.user.home.packages = with pkgs; [
         gocode
@@ -83,6 +82,19 @@ in {
         gotools
       ];
     }
-    {my.hm.user.programs.zsh.oh-my-zsh.plugins = ["golang"];}
+    {
+      my.hm.user.home = {
+        sessionPath = [
+          "$HOME/.local/bin/go"
+        ];
+        sessionVariables = {
+        };
+      };
+    }
+    {
+      my.hm.user.programs.zsh.oh-my-zsh.plugins = [
+        "golang"
+      ];
+    }
   ]);
 }

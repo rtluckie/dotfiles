@@ -37,7 +37,7 @@ in {
       my.hm.user = {
         home = {
           sessionVariables = {
-            EDITOR = "eframe";
+            EDITOR = "emacs";
             VISUAL = "$EDITOR";
             PAGER = "less";
           };

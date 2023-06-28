@@ -84,5 +84,18 @@ in {
         eval "$(pyenv init --path)"
       '';
     }
+    {
+      my.hm.user.programs.zsh.profileExtra = ''
+        eval "$(pyenv init --path)"
+      '';
+      my.hm.user.home = {
+        sessionVariables = {
+          PYENV_ROOT = "${config.my.homeDirectory}/.local/share/pyenv";
+        };
+        sessionPath = [
+          "$PYENV_ROOT/bin"
+        ];
+      };
+    }
   ]);
 }

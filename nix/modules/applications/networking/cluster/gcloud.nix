@@ -16,14 +16,6 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      my.env = {
-        PATH = [
-          "$PATH"
-          "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin"
-        ];
-      };
-    }
-    {
       my.hm.user = {
         home = {
           sessionPath = ["$HOME/.config/krew/bin"];
