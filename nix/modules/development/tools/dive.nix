@@ -5,22 +5,21 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.tools.networking.telepresence;
+  cfg = config.modules.development.tools.dive;
 in {
   options = {
-    modules.tools.networking.telepresence = {
+    modules.development.tools.dive = {
       enable =
-        mkEnableOption "tools.networking.telepresence"
+        mkEnableOption "development.tools.dive"
         // {
-          default = false;
+          default = true;
         };
     };
   };
-
   config = mkIf cfg.enable (mkMerge [
     {
       my.hm.user.home.packages = with pkgs; [
-        telepresence2
+        dive
       ];
     }
   ]);

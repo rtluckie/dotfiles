@@ -14,7 +14,7 @@ with lib; let
   cfg = config.modules.$1.$2;
 in {
   options = {
-    modules.servers.redis = {
+    modules.$1.$2 = {
       enable =
         mkEnableOption "$1.$2"
         // {

@@ -5,14 +5,14 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.tools.networking.telepresence;
+  cfg = config.modules.tools.security.sops;
 in {
   options = {
-    modules.tools.networking.telepresence = {
+    modules.tools.security.sops = {
       enable =
-        mkEnableOption "tools.networking.telepresence"
+        mkEnableOption "tools.security.sops"
         // {
-          default = false;
+          default = true;
         };
     };
   };
@@ -20,7 +20,7 @@ in {
   config = mkIf cfg.enable (mkMerge [
     {
       my.hm.user.home.packages = with pkgs; [
-        telepresence2
+        sops
       ];
     }
   ]);

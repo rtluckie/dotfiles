@@ -5,14 +5,14 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.tools.networking.telepresence;
+  cfg = config.modules.networking.cluster.knative;
 in {
   options = {
-    modules.tools.networking.telepresence = {
+    modules.networking.cluster.knative = {
       enable =
-        mkEnableOption "tools.networking.telepresence"
+        mkEnableOption "networking.cluster.knative"
         // {
-          default = false;
+          default = true;
         };
     };
   };
@@ -20,7 +20,7 @@ in {
   config = mkIf cfg.enable (mkMerge [
     {
       my.hm.user.home.packages = with pkgs; [
-        telepresence2
+        knative
       ];
     }
   ]);
