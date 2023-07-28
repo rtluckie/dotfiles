@@ -13,10 +13,6 @@
           zsh
         ];
         systemPackages = [
-          file
-          git
-          rsync
-          vim
           zsh
         ];
         pathsToLink = ["/share/zsh"];

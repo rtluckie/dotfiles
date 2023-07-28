@@ -30,6 +30,11 @@ in {
       };
       my.hm.user.home.packages = with pkgs; [
         argocd
+        chart-testing
+        fluxcd
+        helm-docs
+        helm-ls
+        k9s
         krew
         kubectl
         kubectx
@@ -37,6 +42,7 @@ in {
         kustomize
         stern
         tanka
+        timoni
       ];
     }
     {

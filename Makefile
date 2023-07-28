@@ -46,7 +46,7 @@ nix/gc:
 ## nix/update
 nix/update:
 	@echo "Updating..."
-	@ nix-channel --update
+	@nix-channel --update
 	@nix flake update 
 
 ## nix build

@@ -2,6 +2,6 @@
   imports = [
     ./main.nix
     ./doom.nix
-    ./emacs-old.nix
+    # ./emacs-old.nix
   ];
 }

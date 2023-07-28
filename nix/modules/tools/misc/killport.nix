@@ -1,18 +1,16 @@
 {
-  inputs,
-  options,
   config,
   lib,
   pkgs,
   ...
 }:
 with lib; let
-  cfg = config.modules.tools.networking.common;
+  cfg = config.modules.tools.misc.killport;
 in {
   options = {
-    modules.tools.networking.common = {
+    modules.tools.misc.killport = {
       enable =
-        mkEnableOption "tools.networking.common"
+        mkEnableOption "tools.misc.killport"
         // {
           default = true;
         };
@@ -22,21 +20,15 @@ in {
   config = mkIf cfg.enable (mkMerge [
     {
       my.hm.user.home.packages = with pkgs; [
-        bind
-        cacert
-        # curlFull
-        dig
-        iftop
-        inetutils
-        ipcalc
-        nmap
-        speedtest-cli
-        wget
+        killport
+      ];
+    }
+    {
+      environment.systemPackages = with pkgs; [
       ];
     }
     {
       my.hm.user.programs.zsh.oh-my-zsh.plugins = [
-        "nmap"
       ];
     }
   ]);

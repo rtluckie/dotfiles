@@ -6,6 +6,19 @@
 }: {
   config = with lib; (mkMerge [
     {
+      environment = with pkgs; {
+        shells = [
+        ];
+        systemPackages = [
+          file
+          git
+          rsync
+          vim
+        ];
+        pathsToLink = [];
+      };
+    }
+    {
       environment = {
         interactiveShellInit = "";
         loginShellInit = "";

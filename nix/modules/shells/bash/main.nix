@@ -45,5 +45,10 @@ in {
         ];
       };
     }
+    {
+      my.hm.user.home.packages = with pkgs; [
+        bashInteractive
+      ];
+    }
   ]);
 }

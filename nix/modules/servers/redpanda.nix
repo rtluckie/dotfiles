@@ -12,7 +12,7 @@ in {
       enable =
         mkEnableOption "servers.redpanda"
         // {
-          default = true;
+          default = false;
         };
     };
   };

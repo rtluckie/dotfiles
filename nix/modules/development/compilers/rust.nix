@@ -5,6 +5,7 @@
   ...
 }:
 with lib; let
+  # frameworks = nixpkgs.darwin.apple_sdk.frameworks;
   cfg = config.modules.development.compilers.rust;
 in {
   options = {
@@ -12,7 +13,7 @@ in {
       enable =
         mkEnableOption "development.compilers.rust"
         // {
-          default = true;
+          default = false;
         };
     };
   };
@@ -26,11 +27,25 @@ in {
       };
     }
     {
-      my.hm.user.home.packages = with pkgs; [
-        rust-bin.stable.latest.default
-        rust-analyzer-unwrapped
-      ];
+      my.hm.user.home = {
+        packages = with pkgs; [
+          # rustc
+          # cargo
+          # libgit2
+          # just
+          # darwin.apple_sdk.frameworks.Security
+          # cargo
+          # libz
+          # rust-analyzer-unwrapped
+          # rustc
+          # darwin.libiconv
+          # openssl
+          # rustup
+        ];
+        sessionVariables.LIBRARY_PATH = ''${lib.makeLibraryPath [pkgs.libiconv]}''${LIBRARY_PATH:+:$LIBRARY_PATH}'';
+      };
     }
+
     {
       my.hm.user.programs.zsh.oh-my-zsh.plugins = [
         "rust"

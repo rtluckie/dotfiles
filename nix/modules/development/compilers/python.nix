@@ -28,6 +28,7 @@ in {
               black
               ipython
               isort
+              mkdocs
               nose
               pip
               pyflakes
@@ -35,9 +36,12 @@ in {
               pyright
               pytest
               python-lsp-server
+              pyyaml
               setuptools
+              six
               virtualenv
               virtualenvwrapper
+              yamale
             ]
         ))
         poetry
@@ -87,6 +91,11 @@ in {
         sessionPath = [
           "$PYENV_ROOT/bin"
         ];
+      };
+    }
+    {
+      my.hm.user.home.shellAliases = {
+        pip = "pip3";
       };
     }
   ]);

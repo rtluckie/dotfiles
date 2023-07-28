@@ -9,7 +9,7 @@ in {
   fonts.fontconfig.enable = true;
   home.username = config.my.username;
   home.homeDirectory = config.my.homeDirectory;
-  home.stateVersion = "23.05";
+  home.stateVersion = "23.11";
   home.language.base = "${defaultLang}";
   home.language.ctype = "${defaultLang}";
   home.language.numeric = "${defaultLang}";

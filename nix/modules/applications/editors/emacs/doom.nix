@@ -25,24 +25,63 @@ in {
         ];
         my.hm.user = {
           home = {
-            sessionPath = ["$HOME/.config/emacs/bin"];
-            sessionVariables = {
-              DOOMDIR = "$HOME/.config/doom";
-              DOOMLOCALDIR = "$HOME/.config/doom-local";
-              DOOMPROFILELOADFILE = "$HOME/.config/doom-local/profiles/load.el";
-            };
+            # sessionPath = ["$HOME/.config/emacs/bin"];
+            # sessionVariables = {
+            #   DOOMDIR = "$HOME/.config/doom";
+            #   DOOMLOCALDIR = "$HOME/.config/doom-local";
+            #   DOOMPROFILELOADFILE = "$HOME/.config/doom-local/profiles/load.el";
+            # };
             packages = with pkgs; [
             ];
           };
         };
       }
       {
-        my.hm.user.home.activation.emacsDoom = inputs.home-manager.lib.hm.dag.entryAfter ["writeBoundary"] ''
-          if [[ ! -d "$HOME/.config/emacs" ]]; then
-          ${pkgs.git}/bin/git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
-          fi
+        my.hm.user.home.activation.emacsDoom = inputs.home-manager.lib.hm.dag.entryAfter ["installPackages"] ''
+            if [[ ! -d "$HOME/.config/emacs" ]]; then
+            ${pkgs.git}/bin/git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
+            fi
+
+            queryEmacsVersion() {
+            local emacs="$1"
+            "$emacs" --batch --eval '(princ (format "%d\n" emacs-major-version))'
+            }
+
+          syncDoomEmacs() {
+            local oldEmacs newEmacs
+            oldEmacs="$(readlink -m "$oldGenPath/home-path/bin/emacs")"
+            newEmacs="$(readlink -m "$newGenPath/home-path/bin/emacs")"
+            if [[ "$newEmacs" == "$oldEmacs" ]]; then
+              return
+            fi
+            if [[ -x "${config.my.homeDirectory}/.config/emacs/bin/doom" ]]; then
+              noteEcho 'This may take a while...'
+
+              local maxfiles
+              maxfiles="$(ulimit -n)"
+              ulimit -n hard
+
+              PATH="$newGenPath/home-path/bin:${pkgs.git}/bin:$PATH" \
+                $DRY_RUN_CMD "${config.my.homeDirectory}/.config/emacs/bin/doom" \
+                  ''${VERBOSE:+-d} sync -e > /dev/null
+
+              oldVersion="$(queryEmacsVersion "$oldEmacs")"
+              newVersion="$(queryEmacsVersion "$newEmacs")"
+              if (( oldVersion != newVersion )); then
+                PATH="$newGenPath/home-path/bin:$PATH" \
+                  $DRY_RUN_CMD "${config.my.homeDirectory}/.config/emacs/bin/doom" \
+                    ''${VERBOSE:+-d} build > /dev/null
+              fi
+
+              ulimit -n "$maxfiles"
+            fi
+          }
+
+          syncDoomEmacs
+
         '';
       }
+
       {
         my.hm.configFile."doom/snippets" = {
           source = "${config.my.dotfiles.configDir}/doom/snippets";

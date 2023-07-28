@@ -5,15 +5,16 @@
   ...
 }: {
   config = with lib; let
-    cmn = import ../common.nix {inherit config lib pkgs;};
+    cmn = import ../../common.nix {inherit config lib pkgs;};
   in (mkMerge [
     {
       environment = with pkgs; {
         shells = [
+          # bash
           bashInteractive
         ];
         systemPackages = [
-          bash
+          # bash
           bashInteractive
         ];
         pathsToLink = [];

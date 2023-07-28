@@ -5,12 +5,12 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.networking.cluster.knative;
+  cfg = config.modules.tools.admin.syft;
 in {
   options = {
-    modules.networking.cluster.knative = {
+    modules.tools.admin.syft = {
       enable =
-        mkEnableOption "networking.cluster.knative"
+        mkEnableOption "tools.admin.syft"
         // {
           default = true;
         };
@@ -20,8 +20,7 @@ in {
   config = mkIf cfg.enable (mkMerge [
     {
       my.hm.user.home.packages = with pkgs; [
-        func
-        kn
+        syft
       ];
     }
   ]);

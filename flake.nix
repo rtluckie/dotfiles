@@ -20,12 +20,12 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     #   inputs.flake-utils.follows = "flake-utils";
     # };
-    flake-utils = {url = "github:numtide/flake-utils";};
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
-    };
+    # flake-utils = {url = "github:numtide/flake-utils";};
+    # rust-overlay = {
+    #   url = "github:oxalica/rust-overlay";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   inputs.flake-utils.follows = "flake-utils";
+    # };
   };
 
   outputs = inputs @ {
@@ -39,7 +39,7 @@
     home-manager,
     nixpkgs,
     # nur,
-    rust-overlay,
+    # rust-overlay,
     ...
   }: let
     # inherit (flake-utils.lib) eachDefaultSystem eachSystem;
@@ -54,7 +54,7 @@
     overlays = [
       # emacs-overlay.overlay
       # cemacs.overlay
-      rust-overlay.overlays.default
+      # rust-overlay.overlays.default
       (final: prev: {devenv = inputs.devenv.defaultPackage.${prev.system};})
       (import ./nix/overlays)
     ];

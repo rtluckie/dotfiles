@@ -12,7 +12,7 @@ in {
       enable =
         mkEnableOption "tools.misc.exa"
         // {
-          default = true;
+          default = false;
         };
     };
   };

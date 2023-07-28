@@ -18,10 +18,10 @@ in {
     };
   };
   config = mkIf cfg.enable (mkMerge [
-    {
-      my.hm.user.home.activation.userBins = inputs.home-manager.lib.hm.dag.entryAfter ["writeBoundary"] ''
-        cp -pr ${config.my.dotfiles.binDir}/** ${config.my.homeDirectory}/.local/bin
-      '';
-    }
+    # {
+    #   my.hm.user.home.activation.userBins = inputs.home-manager.lib.hm.dag.entryAfter ["writeBoundary"] ''
+    #     cp -pr ${config.my.dotfiles.binDir}/** ${config.my.homeDirectory}/.local/bin
+    #   '';
+    # }
   ]);
 }

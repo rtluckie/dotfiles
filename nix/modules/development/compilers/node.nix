@@ -30,5 +30,29 @@ in {
         "npm"
       ];
     }
+
+    {
+      environment = {
+        variables = {
+        };
+      };
+    }
+    {
+      my.hm.user.home = {
+        sessionVariables = {
+          NPM_CONFIG_USERCONFIG = "$HOME/.config/npm/user.config";
+          NPM_CONFIG_GLOBALCONFIG = "$HOME/.config/npm/global.config";
+        };
+      };
+    }
+    {
+      my.hm.configFile."npm/user.config".text = ''
+        prefix=${config.my.hm.cacheHome}/npm
+      '';
+    }
+    {
+      my.hm.configFile."npm/global.config".text = ''
+      '';
+    }
   ]);
 }
