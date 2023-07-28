@@ -5,12 +5,12 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.networking.cluster.knative;
+  cfg = config.modules.tools.security.slsa-verifier;
 in {
   options = {
-    modules.networking.cluster.knative = {
+    modules.tools.security.slsa-verifier = {
       enable =
-        mkEnableOption "networking.cluster.knative"
+        mkEnableOption "tools.security.slsa-verifier"
         // {
           default = true;
         };
@@ -20,8 +20,7 @@ in {
   config = mkIf cfg.enable (mkMerge [
     {
       my.hm.user.home.packages = with pkgs; [
-        func
-        kn
+        slsa-verifier
       ];
     }
   ]);

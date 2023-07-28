@@ -5,12 +5,12 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.networking.cluster.knative;
+  cfg = config.modules.development.tools.go-task;
 in {
   options = {
-    modules.networking.cluster.knative = {
+    modules.development.tools.go-task = {
       enable =
-        mkEnableOption "networking.cluster.knative"
+        mkEnableOption "development.tools.go-task"
         // {
           default = true;
         };
@@ -20,8 +20,7 @@ in {
   config = mkIf cfg.enable (mkMerge [
     {
       my.hm.user.home.packages = with pkgs; [
-        func
-        kn
+        go-task
       ];
     }
   ]);

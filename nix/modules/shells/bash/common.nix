@@ -13,8 +13,8 @@
           bashInteractive
         ];
         systemPackages = [
-          bash
-          bashInteractive
+          # bash
+          # bashInteractive
         ];
         pathsToLink = [];
       };

@@ -5,12 +5,12 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.networking.cluster.knative;
+  cfg = config.modules.development.tools.cue;
 in {
   options = {
-    modules.networking.cluster.knative = {
+    modules.development.tools.cue = {
       enable =
-        mkEnableOption "networking.cluster.knative"
+        mkEnableOption "development.tools.cue"
         // {
           default = true;
         };
@@ -20,8 +20,7 @@ in {
   config = mkIf cfg.enable (mkMerge [
     {
       my.hm.user.home.packages = with pkgs; [
-        func
-        kn
+        cue
       ];
     }
   ]);

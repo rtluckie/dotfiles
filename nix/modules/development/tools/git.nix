@@ -30,17 +30,20 @@ in {
     }
     {
       my.hm.user.home.packages = with pkgs; [
-        git
         exiftool
+        git
+        gitAndTools.act
+        gitAndTools.bfg-repo-cleaner
         gitAndTools.delta
         gitAndTools.gh
+        gitAndTools.git-chglog
         gitAndTools.git-filter-repo
         gitAndTools.git-lfs
         gitAndTools.gitui
         gitAndTools.hub
         gitAndTools.lazygit
         gitAndTools.tig
-        gitAndTools.bfg-repo-cleaner
+
       ];
     }
     {
