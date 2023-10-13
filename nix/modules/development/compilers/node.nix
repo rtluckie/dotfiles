@@ -18,16 +18,16 @@ in {
   };
   config = mkIf cfg.enable (mkMerge [
     {
-      my.hm.user.home.packages = with pkgs; [
-        nodejs
-        nodePackages.yarn
+      my.hm.user.programs.zsh.oh-my-zsh.plugins = [
       ];
     }
     {
-      my.hm.user.programs.zsh.oh-my-zsh.plugins = [
-        "yarn"
-        "node"
-        "npm"
+      my.hm.user.home.packages = with pkgs; [
+        nodejs_20
+
+        nodePackages.yarn
+        nodePackages.pkg
+        nodePackages.typescript
       ];
     }
 
@@ -45,6 +45,16 @@ in {
         };
       };
     }
+    {
+      my.hm.user.home = {
+        sessionVariables = {
+        };
+        sessionPath = [
+          "$HOME/.cache/npm/bin"
+        ];
+      };
+    }
+
     {
       my.hm.configFile."npm/user.config".text = ''
         prefix=${config.my.hm.cacheHome}/npm

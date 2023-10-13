@@ -31,18 +31,19 @@ in {
       };
       my.hm.user.home.packages = with pkgs; [
         tf2pulumi
+        pulumi-bin
       ];
     }
-    {
-      homebrew.brews = [
-        {
-          name = "pulumi";
-          args = [
-            "ignore-dependencies"
-          ];
-        }
-      ];
-    }
+    # {
+    #   homebrew.brews = [
+    #     {
+    #       name = "pulumi";
+    #       args = [
+    #         "ignore-dependencies"
+    #       ];
+    #     }
+    #   ];
+    # }
     {
       my.hm.user.programs.zsh.oh-my-zsh.plugins = [
       ];

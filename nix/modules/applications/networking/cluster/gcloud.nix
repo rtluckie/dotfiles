@@ -25,6 +25,35 @@ in {
         };
       };
     }
+
+    # {
+    #   my.hm.user.home.packages = with pkgs; [
+    #     (
+    #       google-cloud-sdk.withExtraComponents [
+    #         google-cloud-sdk.components.anthos-auth
+    #         google-cloud-sdk.components.anthoscli
+    #         google-cloud-sdk.components.appctl
+    #         google-cloud-sdk.components.beta
+    #         google-cloud-sdk.components.cbt
+    #         google-cloud-sdk.components.gcloud
+    #         google-cloud-sdk.components.gke-gcloud-auth-plugin
+    #         google-cloud-sdk.components.gsutil
+    #         google-cloud-sdk.components.harbourbridge
+    #         google-cloud-sdk.components.kpt
+    #         google-cloud-sdk.components.kubectl
+    #         google-cloud-sdk.components.kubectl-oidc
+    #         google-cloud-sdk.components.kustomize
+    #         google-cloud-sdk.components.local-extract
+    #         google-cloud-sdk.components.nomos
+    #         google-cloud-sdk.components.pkg
+    #         google-cloud-sdk.components.skaffold
+    #         google-cloud-sdk.components.ssh-tools
+    #         google-cloud-sdk.components.terraform-tools
+    #       ]
+    #     )
+    #   ];
+    # }
+
     {
       homebrew.casks = [
         "google-cloud-sdk"

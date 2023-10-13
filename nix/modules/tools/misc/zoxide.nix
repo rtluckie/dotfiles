@@ -55,5 +55,12 @@ in {
         enableZshIntegration = true;
       };
     }
+    {
+      my.hm.user.programs.zsh = with pkgs; {
+        initExtra = ''
+          eval "$(zoxide init --hook pwd --cmd cd zsh)"
+        '';
+      };
+    }
   ]);
 }

@@ -62,6 +62,7 @@ with lib; let
       (loadModule ./applications/virtualization/docker.nix {})
       (loadModule ./applications/virtualization/podman.nix {})
       (loadModule ./applications/virtualization/qemu.nix {})
+      (loadModule ./bucket.nix {})
       (loadModule ./development/common.nix {})
       (loadModule ./development/compilers/go.nix {})
       (loadModule ./development/compilers/jsonnet.nix {})
